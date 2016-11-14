@@ -15,7 +15,7 @@
 	http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
 	<mvc:annotation-driven/>
-	<context:component-scan base-package="cn.leo.springmvc.demo.web"/>
+	<context:component-scan base-package="cn.leo.springmvcdemo.web"/>
 	
 	
 	<!-- 配置视图解析器 -->
