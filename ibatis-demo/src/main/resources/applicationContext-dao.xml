@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="baseIbatisDao" class="cn.leo.ibatisdemo.comm.BaseIbatisDao" abstract="true">
+        <property name="sqlMapClientTemplate">
+            <ref bean="sqlMapClientTemplate"/>
+        </property>
+    </bean>
+    
+    <bean id="userUserDao" class="cn.leo.ibatisdemo.dao.UserUserDao" parent="baseIbatisDao"/>
+
+
+</beans>
