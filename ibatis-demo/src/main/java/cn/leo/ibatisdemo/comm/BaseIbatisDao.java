@@ -2,10 +2,12 @@ package cn.leo.ibatisdemo.comm;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.dao.DataAccessException;
 import org.springframework.orm.ibatis.SqlMapClientTemplate;
 
 public class BaseIbatisDao {
+	protected Logger log = Logger.getLogger(this.getClass());
 
 	private SqlMapClientTemplate sqlMapClientTemplate;
 

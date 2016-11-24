@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"	"http://ibatis.apache.org/dtd/sql-map-2.dtd" >
+	
+<sqlMap namespace="USER_USER">
+
+	<resultMap id="userUserResult" class="cn.leo.ibatisdemo.po.UserUser">
+		<result column="user_id" property="userId" />
+		<result column="username" property="username" />
+		<result column="cellphone" property="cellphone" />
+	</resultMap>
+	
+	<select id="selectByParamMap" resultMap="userUserResult" parameterClass="java.util.HashMap">
+		SELECT user_id, username, cellphone
+		FROM t_user_user
+		<dynamic prepend="WHERE">
+			<isNotNull prepend="and" property="gateway">
+				user_id = #userId#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankPaymentTradeNo">
+				username = #username#
+			</isNotNull>
+			<isNotNull prepend="and" property="bankGatewayTradeNo">
+				cellphone = #cellphone#
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<insert id="insert" parameterClass="cn.leo.ibatisdemo.po.UserUser">
+		INSERT INTO t_user_user (
+		username,
+		cellphone
+		) VALUES (
+		#username#, 
+		#cellphone#
+		)
+	</insert>
+	
+	<update id="update" parameterClass="cn.leo.ibatisdemo.po.UserUser">
+		UPDATE t_user_user
+		SET
+		<isNotEmpty property="username">
+		username = #username#,
+		</isNotEmpty>
+		<isNotEmpty property="cellphone">
+		cellphone = #cellphone#,
+		</isNotEmpty>
+		WHERE user_id = #userId#
+	</update>
+</sqlMap>
