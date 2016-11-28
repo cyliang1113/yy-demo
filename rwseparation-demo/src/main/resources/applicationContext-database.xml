@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+	
+	<!-- 数据源 -->
+	<bean id="defaultDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+	</bean>
+	
+	<!-- 只读数据源 -->
+	<bean id="readOnlyDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName">
+			<value>${jdbc.driverClassName}</value>
+		</property>
+		<property name="url">
+			<value>${jdbc.url}</value>
+		</property>
+		<property name="username">
+			<value>${jdbc.username}</value>
+		</property>
+		<property name="password">
+			<value>${jdbc.password}</value>
+		</property>
+	</bean>
+	
+	<!-- 读写分离动态数据源 -->
+	<bean id="rWDynamicDataSource" class="cn.leo.ibatisdemo.comm.RWDynamicDataSource">
+		<property name="targetDataSources">
+			<map key-type="java.lang.String">
+				<entry key="defaultDataSource" value-ref="defaultDataSource"/>
+				<entry key="readOnlyDataSource" value-ref="readOnlyDataSource"/>
+			</map>
+		</property>
+	</bean>
+	
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+        <property name="configLocation">
+            <value>classpath:sqlmap-config.xml</value>
+        </property>
+        <property name="mappingLocations"> 
+			<value>classpath:/cn/leo/ibatisdemo/dao/map/*.xml</value>
+		</property>
+    </bean>
+    
+    <!-- ibatis模板 -->
+    <bean id="sqlMapClientTemplate" class="org.springframework.orm.ibatis.SqlMapClientTemplate">
+    	<property name="sqlMapClient">
+            <ref bean="sqlMapClient"/>
+        </property>
+        <property name="dataSource">
+            <ref bean="rWDynamicDataSource"/>
+        </property>
+    </bean>
+    
+    <!-- 读写分离 -->
+    <bean id="rWDynamicDataSourceAdvice" class="cn.leo.ibatisdemo.comm.RWDynamicDataSourceAdvice"/>
+    
+    <!-- 事务 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource">
+            <ref bean="rWDynamicDataSource" />
+        </property>
+    </bean>
+    
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">  
+		<tx:attributes>
+		    <tx:method name="insert*" propagation="REQUIRED"/> 
+		    <tx:method name="del*" propagation="REQUIRED"/>  
+		    <tx:method name="update*" propagation="REQUIRED"/>
+		    <tx:method name="*" propagation="REQUIRED"/> 
+		    <!-- read-only="true" -->
+		</tx:attributes>  
+    </tx:advice>
+    
+    <aop:config>
+	    <aop:pointcut id="txPointcut" expression="execution(* cn.leo.ibatisdemo.service.impl.*.*(..))"/>  
+	    <!-- <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice"/> -->
+	    <aop:aspect ref="rWDynamicDataSourceAdvice">
+	    	<aop:around method="around" pointcut-ref="txPointcut"/>
+	    </aop:aspect>
+    </aop:config>
+
+
+</beans>
