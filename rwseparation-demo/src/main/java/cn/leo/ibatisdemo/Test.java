@@ -13,6 +13,11 @@ public class Test {
 		UserUser userUser = service.selectByUserId(10000L);
 
 		System.out.println(userUser);
+		
+		UserUser userUser2 = new UserUser();
+		userUser2.setUsername("yoo");
+		userUser2.setCellphone("15166668899");
+		service.saveUser(userUser2);
 
 	}
 }

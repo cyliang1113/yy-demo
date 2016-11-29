@@ -11,26 +11,27 @@ public class BaseIbatisDao {
 
 	private SqlMapClientTemplate sqlMapClientTemplate;
 
-	public Object queryForObject(String statementName) throws DataAccessException {
+	protected Object queryForObject(String statementName) throws DataAccessException {
 		return queryForObject(statementName, null);
 	}
 
-	public Object queryForObject(final String statementName, final Object parameterObject) {
+	protected Object queryForObject(final String statementName, final Object parameterObject) {
 		return sqlMapClientTemplate.queryForObject(statementName, parameterObject);
 	}
 
-	public List queryForList(final String statementName) {
+	protected List queryForList(final String statementName) {
 		return queryForList(statementName, null);
 	}
 
-	public List queryForList(final String statementName, final Object parameterObject) {
+	protected List queryForList(final String statementName, final Object parameterObject) {
 		return sqlMapClientTemplate.queryForList(statementName, parameterObject);
 	}
 
-	public SqlMapClientTemplate getSqlMapClientTemplate() {
-		return sqlMapClientTemplate;
+	protected Object saveObject(final String statementName, final Object obj) {
+		return sqlMapClientTemplate.insert(statementName, obj);
 	}
 
+	//
 	public void setSqlMapClientTemplate(SqlMapClientTemplate sqlMapClientTemplate) {
 		this.sqlMapClientTemplate = sqlMapClientTemplate;
 	}

@@ -21,4 +21,8 @@ public class UserUserServiceImpl implements UserUserService {
 	public void setUserUserDao(UserUserDao userUserDao) {
 		this.userUserDao = userUserDao;
 	}
+
+	public void saveUser(UserUser user) {
+		userUserDao.saveUser(user);
+	}
 }

@@ -74,8 +74,8 @@
         </property>
     </bean>
     
-    <!-- 读写分离Interceptor -->
-    <bean id="rWDynamicDataSourceInterceptor" class="cn.leo.ibatisdemo.comm.RWDynamicDataSourceInterceptor"/>
+    <!-- 读写分离advice -->
+    <bean id="rWDynamicDataSourceAdvice" class="cn.leo.ibatisdemo.comm.RWDynamicDataSourceAdvice"/>
     
     <!-- 事务管理器 -->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
@@ -87,7 +87,6 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">
 		<tx:attributes>
 		    <tx:method name="insert*" propagation="REQUIRED"/> 
-		    <tx:method name="save*" propagation="REQUIRED"/> 
 		    <tx:method name="del*" propagation="REQUIRED"/>  
 		    <tx:method name="update*" propagation="REQUIRED"/>
 		    <tx:method name="*" propagation="REQUIRED"/> 
@@ -99,8 +98,9 @@
 	    <aop:pointcut id="txPointcut" expression="execution(* cn.leo.ibatisdemo.service.impl.*.*(..))"/>  
 	    
 	    <aop:advisor pointcut-ref="txPointcut" advice-ref="txAdvice" />
-	    <aop:advisor pointcut-ref="txPointcut" advice-ref="rWDynamicDataSourceInterceptor" order="10000"/>
-	    
+	    <aop:aspect ref="rWDynamicDataSourceAdvice" order="10000">  <!--order 拦截器链上排序, 值越小优先级越高 -->
+	    	<aop:around method="around" pointcut-ref="txPointcut"/>
+	    </aop:aspect>
     </aop:config>
 
 

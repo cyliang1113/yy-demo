@@ -12,4 +12,6 @@ public interface UserUserService {
 
 	@ReadOnlyDataSource
 	public List<UserUser> selectByParam(Map<String, Object> param);
+
+	public void saveUser(UserUser user);
 }
