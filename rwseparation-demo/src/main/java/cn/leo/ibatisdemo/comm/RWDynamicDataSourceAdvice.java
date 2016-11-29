@@ -6,6 +6,11 @@ import org.apache.log4j.Logger;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.reflect.MethodSignature;
 
+/**
+ * 读写分离通知
+ * @author chenyouliang
+ *
+ */
 public class RWDynamicDataSourceAdvice {
 	protected Logger log = Logger.getLogger(this.getClass());
 

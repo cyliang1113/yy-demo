@@ -4,8 +4,13 @@ import java.lang.reflect.Method;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.aspectj.lang.ProceedingJoinPoint;
 
+/**
+ * 读写分离拦截器
+ * 
+ * @author chenyouliang
+ * 
+ */
 public class RWDynamicDataSourceInterceptor implements MethodInterceptor {
 
 	public Object invoke(final MethodInvocation invocation) throws Throwable {

@@ -1,7 +1,7 @@
 package cn.leo.ibatisdemo.comm;
 
 /**
- * 读写分离数据源Holder
+ * 读写分离数据源名称Holder
  * 
  * @author chenyouliang
  * 
