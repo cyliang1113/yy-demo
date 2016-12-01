@@ -58,9 +58,10 @@
     <tx:advice id="txAdvice" transaction-manager="transactionManager">  
 		<tx:attributes>
 		    <tx:method name="insert*" propagation="REQUIRED"/> 
+		    <tx:method name="save*" propagation="REQUIRED"/> 
 		    <tx:method name="del*" propagation="REQUIRED"/>  
 		    <tx:method name="update*" propagation="REQUIRED"/>
-		    <tx:method name="*" propagation="REQUIRED"/> 
+		    <tx:method name="*" read-only="true"/> 
 		    <!-- read-only="true" -->
 		</tx:attributes>  
     </tx:advice>
