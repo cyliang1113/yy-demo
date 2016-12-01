@@ -13,13 +13,13 @@
 		SELECT user_id, username, cellphone
 		FROM t_user_user
 		<dynamic prepend="WHERE">
-			<isNotNull prepend="and" property="gateway">
+			<isNotNull prepend="and" property="userId">
 				user_id = #userId#
 			</isNotNull>
-			<isNotNull prepend="and" property="bankPaymentTradeNo">
+			<isNotNull prepend="and" property="username">
 				username = #username#
 			</isNotNull>
-			<isNotNull prepend="and" property="bankGatewayTradeNo">
+			<isNotNull prepend="and" property="cellphone">
 				cellphone = #cellphone#
 			</isNotNull>
 		</dynamic>

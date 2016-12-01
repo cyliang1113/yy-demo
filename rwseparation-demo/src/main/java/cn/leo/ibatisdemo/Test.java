@@ -14,10 +14,10 @@ public class Test {
 
 		System.out.println(userUser);
 		
-		UserUser userUser2 = new UserUser();
-		userUser2.setUsername("yoo");
-		userUser2.setCellphone("15166668899");
-		service.saveUser(userUser2);
+//		UserUser userUser2 = new UserUser();
+//		userUser2.setUsername("yoo");
+//		userUser2.setCellphone("15166668899");
+//		service.saveUser(userUser2);
 
 	}
 }
