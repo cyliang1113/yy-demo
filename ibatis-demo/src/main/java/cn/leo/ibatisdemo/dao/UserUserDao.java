@@ -18,4 +18,5 @@ public class UserUserDao extends BaseIbatisDao {
 	public List<UserUser> selectByParam(Map<String, Object> param) {
 		return (List<UserUser>) super.queryForList("USER_USER.selectByParamMap", param);
 	}
+	
 }

@@ -1,5 +1,9 @@
 package cn.leo.ibatisdemo;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import cn.leo.ibatisdemo.po.UserUser;
@@ -14,5 +18,11 @@ public class Test {
 
 		System.out.println(userUser);
 
+		Map map = new HashMap<String, Object>();
+		map.put("username", "leon");
+		List<UserUser> selectByParam = service.selectByParam(map);
+		for (UserUser userUser2 : selectByParam) {
+			System.out.println(userUser2);
+		}
 	}
 }
