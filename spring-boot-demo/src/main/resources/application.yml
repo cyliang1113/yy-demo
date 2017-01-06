@@ -2,4 +2,4 @@
 server:
   port: 8080
   sessionTimeout: 30
-  contextPath: /spring-boot-demo
+  contextPath: /spring-boot-demo/
