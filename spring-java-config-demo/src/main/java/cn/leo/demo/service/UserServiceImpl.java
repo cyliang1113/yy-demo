@@ -1,7 +1,16 @@
 package cn.leo.demo.service;
 
-public class UserServiceImpl {
+import cn.leo.demo.dao.UserDao;
+
+public class UserServiceImpl implements UserService {
+	private UserDao userDao;
+
 	public String findUsername() {
-		return "leon";
+		return userDao.findUsername();
 	}
+
+	public void setUserDao(UserDao userDao) {
+		this.userDao = userDao;
+	}
+
 }
