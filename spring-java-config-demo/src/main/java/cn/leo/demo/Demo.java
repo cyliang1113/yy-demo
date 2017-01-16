@@ -5,8 +5,9 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import cn.leo.demo.config.ApplicationConfig;
 import cn.leo.demo.service.OrderServiceImpl;
 import cn.leo.demo.service.UserServiceImpl;
+import cn.leo.demo.utils.DataSource;
 
-public class Test {
+public class Demo {
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 
@@ -15,5 +16,8 @@ public class Test {
 
 		OrderServiceImpl orderService = (OrderServiceImpl) context.getBean("orderService");
 		System.out.println(orderService.findOrderPrice());
+
+		DataSource dataSource = (DataSource) context.getBean("dataSource");
+		System.out.println(dataSource.getUsername() + "/" + dataSource.getPassword());
 	}
 }

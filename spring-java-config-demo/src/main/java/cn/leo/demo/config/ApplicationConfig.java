@@ -3,6 +3,7 @@ package cn.leo.demo.config;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * java config
@@ -11,8 +12,9 @@ import org.springframework.context.annotation.ImportResource;
  * 
  */
 @Configuration
+@PropertySource("classpath:jdbc.properties")
 // 引入其他JavaConfig
-@Import({ ApplicationConfigDao.class, ApplicationConfigService.class })
+@Import({ ApplicationConfigDao.class, ApplicationConfigService.class, ApplicationConfigDataSource.class })
 // 引入xml配置文件
 @ImportResource("classpath:applicationContext-service.xml")
 public class ApplicationConfig {
