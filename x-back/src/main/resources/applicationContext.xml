@@ -19,6 +19,8 @@
 			</list>
 		</property>
 	</bean>
+	
+	<context:component-scan base-package="cn.leo.xback.service" />
 
 	<import resource="classpath:applicationContext-database.xml" />
 </beans>

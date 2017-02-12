@@ -19,7 +19,10 @@ public class SysMenu {
 	private Integer menuType;
 
 	// url值
-	private Integer menuUrl;
+	private String menuUrl;
+
+	// 菜单权重, 排序用, 同级菜单weight值越小, 菜单显示时排在前面
+	private Integer menuWeight;
 
 	// 父菜单id
 	private Integer parentMenuId;
@@ -30,7 +33,75 @@ public class SysMenu {
 	// 子菜单
 	private List<SysMenu> childrenMenu;
 
-	// 菜单权重, 同一级菜单weight值越小, 菜单显示时排在前面
-	private Integer menuWeight;
+	public Integer getId() {
+		return id;
+	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	public Integer getMenuLevel() {
+		return menuLevel;
+	}
+
+	public void setMenuLevel(Integer menuLevel) {
+		this.menuLevel = menuLevel;
+	}
+
+	public Integer getMenuType() {
+		return menuType;
+	}
+
+	public void setMenuType(Integer menuType) {
+		this.menuType = menuType;
+	}
+
+	public String getMenuUrl() {
+		return menuUrl;
+	}
+
+	public void setMenuUrl(String menuUrl) {
+		this.menuUrl = menuUrl;
+	}
+
+	public Integer getMenuWeight() {
+		return menuWeight;
+	}
+
+	public void setMenuWeight(Integer menuWeight) {
+		this.menuWeight = menuWeight;
+	}
+
+	public Integer getParentMenuId() {
+		return parentMenuId;
+	}
+
+	public void setParentMenuId(Integer parentMenuId) {
+		this.parentMenuId = parentMenuId;
+	}
+
+	public SysMenu getParentMenu() {
+		return parentMenu;
+	}
+
+	public void setParentMenu(SysMenu parentMenu) {
+		this.parentMenu = parentMenu;
+	}
+
+	public List<SysMenu> getChildrenMenu() {
+		return childrenMenu;
+	}
+
+	public void setChildrenMenu(List<SysMenu> childrenMenu) {
+		this.childrenMenu = childrenMenu;
+	}
 }
