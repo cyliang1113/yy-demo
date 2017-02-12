@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>home</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/easyui/themes/metro/easyui.css}" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/easyui/themes/icon.css}" href="../../themes/icon.css">
+	<script type="text/javascript" th:src="@{/resources/easyui/jquery.min.js}" src="../../jquery.min.js"></script>
+	<script type="text/javascript" th:src="@{/resources/easyui/jquery.easyui.min.js}" src="../../jquery.easyui.min.js"></script>
+</head>
+
+<body>
+	<div class="easyui-layout" style="width:100%; height:720px;">
+	
+        <div data-options="region:'north'" style="height:50px; background-color: #daeef5; font-size: 17px; padding-left: 20px; padding-top: 15px">
+        		X-back
+        </div>
+        
+        <div data-options="region:'west', split:true" title=" " style="width:12%;">
+	        <ul id="sysMenu" class="easyui-tree" data-options="animate:true">
+	            <li data-options="state:'closed'">
+	                <span>系统管理</span>
+	                <ul>
+	                	<li><span>菜单管理</span></li>
+	                    <li data-options="state:'closed'">
+	                        <span>权限管理</span>
+	                        <ul>
+	                            <li><span>角色管理</span></li>
+	                            <li><span>用户管理</span></li>
+	                        </ul>
+	                    </li>
+	                </ul>
+	            </li>
+	            <li data-options="state:'closed'">
+	                <span>订单管理</span>
+	                <ul>
+	                	<li>新订单监控</li>
+	                </ul>
+	            </li>
+	            <li data-options="state:'closed'">
+	                <span>财务管理</span>
+	            </li>
+	        </ul>
+        </div>
+        
+        <div id="contentCenter" data-options="region:'center', title:'center', iconCls:'icon-ok'" style="width:88%;">
+        	
+        </div>
+        
+    </div>
+</body>
+
+<script type="text/javascript">
+	$(function(){
+		$.get("/sys-back/home/menu", function(ListData){
+			$('#sysMenu').tree({
+		    	data: ListData,
+		    	onClick: function(node){
+		    		if(node.attributes != null){
+		    			if(node.attributes.url != null){
+		    				var content = '<div style="width:100%; height:100%; overflow:hidden;">';
+		    				content	+= '<iframe src="' + node.attributes.url + '" scrolling="auto" style="width:100%; height:100%; border:0;"></iframe></div>';
+		    				$("#contentCenter").html(content);
+		    			}
+		    		}
+		    		
+		    	}
+		    });
+		});
+		
+		
+	    
+	});
+</script>
+
+
+
+
+
+
+</html>
