@@ -13,16 +13,15 @@ import cn.leo.xback.po.sys.SysMenu;
 import cn.leo.xback.service.sys.SysMenuService;
 
 @Controller
-public class SysMenuController {
+public class SysMenuManageController {
 	private final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
 	private SysMenuService sysMenuService;
 
-	@RequestMapping({ "/sys/menu" })
-	@ResponseBody
-	public List<SysMenu> allSysMenu() {
-		return sysMenuService.selectAll();
+	@RequestMapping({ "/sysmanage/menumanage" })
+	public String sysMenuManage() {
+		return "sys/menumanage";
 	}
 
 }

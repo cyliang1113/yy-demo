@@ -18,7 +18,7 @@ public class SysMenu {
 	// 菜单类型: 1, 节点; 2, url;
 	private Integer menuType;
 
-	// url值
+	// url值: 当菜单类型为2时, 才有url值
 	private String menuUrl;
 
 	// 菜单权重, 排序用, 同级菜单weight值越小, 菜单显示时排在前面

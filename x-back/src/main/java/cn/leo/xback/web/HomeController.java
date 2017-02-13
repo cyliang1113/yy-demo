@@ -1,5 +1,7 @@
 package cn.leo.xback.web;
 
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import cn.leo.xback.po.sys.SysMenu;
 import cn.leo.xback.service.sys.SysMenuService;
 import cn.leo.xback.vo.sys.EasyuiSysMenuVo;
+
 @Controller
 public class HomeController {
 	@Autowired
@@ -29,35 +32,84 @@ public class HomeController {
 	@ResponseBody
 	public List<EasyuiSysMenuVo> homeMenu() {
 		List<SysMenu> selectAll = sysMenuService.selectAll();
-		
+
 		return initHomeMenu(selectAll);
-		
-		
-//		LinkedList<EasyuiSysMenuVo> list = new LinkedList<EasyuiSysMenuVo>();
-//		EasyuiSysMenuVo easyuiSysMenuVo1 = new EasyuiSysMenuVo(1, "系统管理", null, null);
-//
-//		LinkedList<EasyuiSysMenuVo> easyuiSysMenuVo1Children = new LinkedList<EasyuiSysMenuVo>();
-//		
-//		EasyuiSysMenuVo easyuiSysMenuVo12 = new EasyuiSysMenuVo(12, "菜单管理", null, null);
-//		easyuiSysMenuVo1Children.add(easyuiSysMenuVo12);
-//		Map<String, String> easyuiSysMenuVo12attributes = new HashMap<String, String>();
-//		easyuiSysMenuVo12attributes.put("url", "http://www.baidu.com");
-//		easyuiSysMenuVo12.setAttributes(easyuiSysMenuVo12attributes);
-//		easyuiSysMenuVo12.setState("open");
-//		
-//		EasyuiSysMenuVo easyuiSysMenuVo11 = new EasyuiSysMenuVo(11, "权限管理", null, null);
-//		easyuiSysMenuVo1Children.add(easyuiSysMenuVo11);
-//		
-//		
-//		
-//		easyuiSysMenuVo1.setChildren(easyuiSysMenuVo1Children);
-//		
-//		list.add(easyuiSysMenuVo1);
-//		return list;
 	}
-	
-	private List<EasyuiSysMenuVo> initHomeMenu(List<SysMenu> sysMenuList){
-		LinkedList<EasyuiSysMenuVo> list = new LinkedList<EasyuiSysMenuVo>();
-		return list;
+
+	// 初始化主页菜单, 使其为树结构用于前端显示
+	private List<EasyuiSysMenuVo> initHomeMenu(List<SysMenu> sysMenuList) {
+
+		List<EasyuiSysMenuVo> lv1MenuList = new LinkedList<EasyuiSysMenuVo>();
+		Map<Integer, EasyuiSysMenuVo> lv1MenuMap = new HashMap<Integer, EasyuiSysMenuVo>();
+
+		List<EasyuiSysMenuVo> lv2MenuList = new LinkedList<EasyuiSysMenuVo>();
+		Map<Integer, EasyuiSysMenuVo> lv2MenuMap = new HashMap<Integer, EasyuiSysMenuVo>();
+
+		List<EasyuiSysMenuVo> lv3MenuList = new LinkedList<EasyuiSysMenuVo>();
+
+		if (sysMenuList != null) {
+			for (SysMenu sysMenu : sysMenuList) {
+				EasyuiSysMenuVo menuVo = new EasyuiSysMenuVo(sysMenu.getId(), sysMenu.getMenuName(), sysMenu.getMenuLevel(),
+						sysMenu.getMenuType(), sysMenu.getMenuUrl(), sysMenu.getMenuWeight(), sysMenu.getParentMenuId());
+				if (menuVo.getmLevel() == 1) {
+					lv1MenuList.add(menuVo);
+					lv1MenuMap.put(menuVo.getId(), menuVo);
+				} else if (menuVo.getmLevel() == 2) {
+					lv2MenuList.add(menuVo);
+					lv2MenuMap.put(menuVo.getId(), menuVo);
+				} else if (menuVo.getmLevel() == 3) {
+					lv3MenuList.add(menuVo);
+				}
+			}
+
+			for (int i = 0; i < lv3MenuList.size(); i++) {
+				EasyuiSysMenuVo lv3Menu = lv3MenuList.get(i);
+				Integer parentId = lv3Menu.getpId();
+				EasyuiSysMenuVo lv2Menu = lv2MenuMap.get(parentId);
+				if (lv2Menu != null) {
+					if (lv2Menu.getChildren() == null) {
+						lv2Menu.setChildren(new LinkedList<EasyuiSysMenuVo>());
+					}
+					lv2Menu.getChildren().add(lv3Menu);
+				}
+			}
+
+			for (int i = 0; i < lv2MenuList.size(); i++) {
+				EasyuiSysMenuVo lv2Menu = lv2MenuList.get(i);
+				Integer parentId = lv2Menu.getpId();
+				EasyuiSysMenuVo lv1Menu = lv1MenuMap.get(parentId);
+				if (lv1Menu != null) {
+					if (lv1Menu.getChildren() == null) {
+						lv1Menu.setChildren(new LinkedList<EasyuiSysMenuVo>());
+					}
+					lv1Menu.getChildren().add(lv2Menu);
+				}
+			}
+
+		}
+
+		if (lv1MenuList.size() > 0) {
+			Collections.sort(lv1MenuList, new Comparator<EasyuiSysMenuVo>() {
+				@Override
+				public int compare(EasyuiSysMenuVo o1, EasyuiSysMenuVo o2) {
+					return o1.getmWeight() - o2.getmWeight();
+				}
+
+			});
+		}
+
+		for (EasyuiSysMenuVo lv1Menu : lv1MenuList) {
+			if (lv1Menu.getmType() == 1 && lv1Menu.getChildren() != null && lv1Menu.getChildren().size() > 0) {
+				Collections.sort(lv1Menu.getChildren(), new Comparator<EasyuiSysMenuVo>() {
+					@Override
+					public int compare(EasyuiSysMenuVo o1, EasyuiSysMenuVo o2) {
+						return o1.getmWeight() - o2.getmWeight();
+					}
+
+				});
+			}
+		}
+
+		return lv1MenuList;
 	}
 }
