@@ -15,4 +15,47 @@
 	<select id="selectAll" resultMap="SysMenuResultMap">
 		select * from t_sys_menu
 	</select>
+	
+	<sql id="selectByConditions">
+		select * from t_sys_menu
+		<trim prefix="where" prefixOverrides="and">
+			<if test="menuName != null">
+		        menu_name like concat('%', #{menuName}, '%')
+		     </if>
+			 <if test="menuLevel != null">
+		        and menu_level = #{menuLevel}
+		     </if>
+		     <if test="menuType != null">
+		        and menu_type = #{menuType}
+		     </if>
+		</trim>
+	</sql>
+	
+	<select id="selectByParamsCount" resultType="java.lang.Long" parameterType="java.util.HashMap">
+		select count(*) from(
+			<include refid="selectByConditions" />
+		) t
+	</select>
+	
+	<select id="selectByParams" resultMap="SysMenuResultMap"  parameterType="java.util.Map">
+		<include refid="selectByConditions"/>
+		<if test="orderField != null">
+			order by ${orderField} 
+			<if test="orderType != null">
+				${orderType}
+			</if>
+		</if>
+		<trim prefix="limit" prefixOverrides=",">
+			<if test="start != null">
+				#{start}
+			</if>
+			<if test="end != null">
+				, #{end}
+			</if>
+			<if test="end == null">
+				, 15
+			</if>
+		</trim>
+	</select>
+	
 </mapper>
