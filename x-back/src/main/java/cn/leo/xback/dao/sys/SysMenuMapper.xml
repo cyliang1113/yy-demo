@@ -20,7 +20,7 @@
 		select * from t_sys_menu
 		<trim prefix="where" prefixOverrides="and">
 			<if test="menuName != null">
-		        menu_name like concat('%', #{menuName}, '%')
+		        menu_name like #{menuName}
 		     </if>
 			 <if test="menuLevel != null">
 		        and menu_level = #{menuLevel}

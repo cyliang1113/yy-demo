@@ -11,8 +11,8 @@
 </head>
 
 <body>
-	<div class="easyui-layout">
-		<div id="tb" style="padding:10px 10px;">
+	<div class="easyui-layout" style="width: 98%; padding-left: 8px;">
+		<div id="tb" style="padding:8px 0px;">
 			菜单名称: <input name="menuName" class="easyui-textbox" style="width:150px;">
 			菜单等级: 
 		    <select name="menuLevel" class="easyui-combobox" panelHeight="auto" style="width:100px">
@@ -27,7 +27,7 @@
 		    </select>
 		    <a id="searchButton" class="easyui-linkbutton" iconCls="icon-search">查询</a>
 		</div>
-		<table id="menuGrid"></table>
+		<table id="dg"></table>
 	</div>
 </body>
 
@@ -35,32 +35,69 @@
 <script th:inline="javascript">
 	$(function(){
 		$("#searchButton").on('click', function() {
-			
-			$("#menuGrid").datagrid({
+			$("#dg").datagrid({
 				fitColumns: true,
-				columns:[ [
+				columns: [ [
 				    {field:'menuName', title: '菜单名称', width: 50},
-			    	{field:'menuLevel', title: '菜单等级', width: 40},
-			    	{field:'menuType', title: '菜单类型', width: 40},
+			    	{field:'menuLevel', title: '菜单等级', width: 40, 
+				     formatter: function(value,row,index){
+						if (row.menuLevel == 1){
+							return "一级菜单";
+						}
+						if (row.menuLevel == 2){
+							return "二级菜单";
+						}
+						if (row.menuLevel == 3){
+							return "三级菜单";
+						}
+					 }
+				    },
+			    	{field:'menuType', title: '菜单类型', width: 40,
+					 formatter: function(value,row,index){
+						if (row.menuType == 1){
+							return "节点";
+						}
+						if(row.menuType == 2){
+							return "url";
+						}
+					 }	
+			    	},
 			    	{field:'menuUrl', title: '菜单url', width: 70},
-			    	{field:'operate', title: '操作', width: 50}
+			    	{field:'operate', title: '操作', width: 50,
+		    		 formatter: function(value,row,index){
+		    		 	var str = "";
+						str += "<a href='#' style='text-decoration: none; color: #05569d;'>修改</a>";
+						if (row.menuType == 1 && (row.menuLevel == 1 || row.menuLevel == 2)){
+							str += "&nbsp;<a href='#' style='text-decoration: none; color: #05569d;'>子菜单</a>";
+						}
+						return str;
+					 }
+			    	}
 				] ],
 				url: [[@{/sysmanage/menumanage/load}]],
-				method: 'post', 
 				queryParams: {
 					"menuName": $("input[name='menuName']").val(),
 					"menuLevel": $("input[name='menuLevel']").val(),
 					"menuType": $("input[name='menuType']").val()
 				},
 				loadFilter: function(page){
-					console.debug(page);
-					return {total: 0, rows:[]}
+					var data = {};
+					data["total"] = page.total;
+					data["rows"] = page.items;
+					return data;
 				},
+			    singleSelect: true,
 				border: false,
-				
-				pagination: true,
 				pageList: [15, 50, 100],
-			    pageSize: 15
+			    pageSize: 15,
+				pagination: true
+			});
+			var p = $('#dg').datagrid('getPager');
+			$(p).pagination({
+			   	beforePageText: '第',
+			   	afterPageText: '页	共 {pages} 页',
+			   	showRefresh: false,
+			   	displayMsg: '共 {total} 条记录',
 			});
 		});
 	});

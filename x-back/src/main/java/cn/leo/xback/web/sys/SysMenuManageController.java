@@ -36,7 +36,7 @@ public class SysMenuManageController {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 
 		if (StringUtils.isNotEmpty(menu.getMenuName())) {
-			params.put("menuName", menu.getMenuName());
+			params.put("menuName", "%" + menu.getMenuName() + "%");
 		}
 		if (menu.getMenuLevel() != null) {
 			params.put("menuLevel", menu.getMenuLevel());
@@ -44,10 +44,10 @@ public class SysMenuManageController {
 		if (menu.getMenuType() != null) {
 			params.put("menuType", menu.getMenuType());
 		}
-		
+
 		params.put("orderField", "id");
 		params.put("orderType", "desc");
-		
+
 		if (page.getCurrentPage() != null && page.getCurrentPage() >= 1) {
 			if (page.getPageSize() != null && page.getPageSize() >= Constant.DEFAULT_PAGE_SIZE) {
 				Long start = (page.getCurrentPage() - 1) * page.getPageSize();
