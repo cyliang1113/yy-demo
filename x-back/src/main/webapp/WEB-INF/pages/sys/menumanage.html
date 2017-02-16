@@ -37,6 +37,7 @@
 		$("#searchButton").on('click', function() {
 			$("#dg").datagrid({
 				fitColumns: true,
+				rownumbers: true,
 				columns: [ [
 				    {field:'menuName', title: '菜单名称', width: 50},
 			    	{field:'menuLevel', title: '菜单等级', width: 40, 
@@ -87,10 +88,10 @@
 					return data;
 				},
 			    singleSelect: true,
-				border: false,
+				//border: false,
+				pagination: true,
 				pageList: [15, 50, 100],
-			    pageSize: 15,
-				pagination: true
+			    pageSize: 15
 			});
 			var p = $('#dg').datagrid('getPager');
 			$(p).pagination({
