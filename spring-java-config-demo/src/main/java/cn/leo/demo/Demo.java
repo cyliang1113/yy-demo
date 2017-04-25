@@ -8,6 +8,7 @@ import cn.leo.demo.service.UserServiceImpl;
 import cn.leo.demo.utils.DataSource;
 
 public class Demo {
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(ApplicationConfig.class);
 

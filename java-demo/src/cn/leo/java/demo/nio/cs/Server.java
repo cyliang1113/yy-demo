@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.CharBuffer;
-import java.nio.channels.SelectableChannel;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
@@ -21,7 +20,7 @@ public class Server {
 		ServerSocketChannel serverSocketChannel = null;
 		Selector selector = null;
 		try {
-			inetSocketAddress = new InetSocketAddress("127.0.0.1", 9999);
+			inetSocketAddress = new InetSocketAddress("10.112.1.15", 9999);
 			serverSocketChannel = ServerSocketChannel.open();
 			serverSocketChannel.bind(inetSocketAddress);
 			serverSocketChannel.configureBlocking(false);

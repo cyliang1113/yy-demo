@@ -4,10 +4,16 @@ public class Demo {
 	public static void main(String[] args) {
 		Man m = new Man();
 		System.out.println(m.age);
-		m.getName();
+		m.getClassName();
+		
+
 		Person p = m;
 		System.out.println(p.age);
-		p.getName();
+		p.getClassName();
+		
+		Gay gay = new Gay();
+		gay.isPerson();
+		
 
 		// System.out.println("------------------");
 		// new Man("gg");
