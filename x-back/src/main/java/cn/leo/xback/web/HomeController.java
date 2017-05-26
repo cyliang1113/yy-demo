@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -23,7 +24,9 @@ public class HomeController {
 
 	// 主页
 	@RequestMapping({ "/", "/home" })
-	public String homepage() {
+	public String homepage(Model model) {
+		List<EasyuiSysMenuVo> memuList = homeMenu();
+		model.addAttribute("menuList", memuList);
 		return "home";
 	}
 
@@ -49,8 +52,9 @@ public class HomeController {
 
 		if (sysMenuList != null) {
 			for (SysMenu sysMenu : sysMenuList) {
-				EasyuiSysMenuVo menuVo = new EasyuiSysMenuVo(sysMenu.getId(), sysMenu.getMenuName(), sysMenu.getMenuLevel(),
-						sysMenu.getMenuType(), sysMenu.getMenuUrl(), sysMenu.getMenuWeight(), sysMenu.getParentMenuId());
+				EasyuiSysMenuVo menuVo = new EasyuiSysMenuVo(sysMenu.getId(), sysMenu.getMenuName(),
+						sysMenu.getMenuLevel(), sysMenu.getMenuType(), sysMenu.getMenuUrl(), sysMenu.getMenuWeight(),
+						sysMenu.getParentMenuId());
 				if (menuVo.getmLevel() == 1) {
 					lv1MenuList.add(menuVo);
 					lv1MenuMap.put(menuVo.getId(), menuVo);

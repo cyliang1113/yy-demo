@@ -1,0 +1,121 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>X HOME</title>
+	
+	<script type="text/javascript" th:src="@{/resources/jquery/jquery.min.js}" src="../../../resources/jquery/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap.min.css}"  href="../../../resources/bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.min.js}" src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/metismenu/metisMenu.css}"  href="../../../resources/metismenu/metisMenu.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/metismenu/demo.css}"  href="../../../resources/metismenu/demo.css">
+	<script type="text/javascript" th:src="@{/resources/metismenu/metisMenu.min.js}" src="../../../resources/metismenu/metisMenu.min.js"></script>
+
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/easyui/themes/metro/easyui.css}" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/easyui/themes/icon.css}" href="../../themes/icon.css">
+	<script type="text/javascript" th:src="@{/resources/easyui/jquery.easyui.min.js}" src="../../resources/easyui/jquery.easyui.min.js"></script>
+	
+</head>
+
+<body class="easyui-layout" style="overflow: hidden; border: none; margin: 0px; padding: 0px;">
+	<div class="easyui-layout" style="width:100%; height: 100%;">
+	
+        <div data-options="region:'north'" style="padding-left: 40px; padding-top: 15px; background-color:#414b59; height:50px; font-size: 17px; color: #ffffff;">
+        		X-back
+        </div>
+        
+        <div class='sidebar-nav' data-options="region:'west'" title=" " style="width:15%; height:100%;">
+        	<!-- 
+	        <ul id="sysMenu" class="easyui-tree" data-options="animate:true"></ul>
+        	 -->
+	        <ul id="sysMenu" class="metismenu">
+				<li>
+					<a href="#">菜单 1 <span class="glyphicon arrow"></span></a>
+					<ul>
+						<li><a href="#">菜单1.1</a></li>
+						<li><a href="#">菜单1.2</a></li>
+						<li><a href="#">菜单菜单</a></li>
+						<li><a href="#">菜单菜单 1.4</a></li>
+					</ul>
+				</li>
+				<li>
+					<a href="">菜单菜单2 <span class="glyphicon arrow"></span></a>
+					<ul>
+						<li><a href="#">菜单2.1</a></li>
+						<li><a href="#">菜单2.2</a></li>
+						<li>
+							<a href="#">菜单2.3 <span class="glyphicon plus"></span></a>
+							<ul>
+								<li><a href="#">item 2.3.1</a></li>
+								<li><a href="#">item 2.3.2</a></li>
+								<li><a href="#">item 2.3.3</a></li>
+								<li><a href="#">item 2.3.4</a></li>
+							</ul>
+						</li>
+						<li><a href="#">item 2.4</a></li>
+						<li>
+							<a href="#">Menu 2.5 <span class="glyphicon plus"></span></a>
+							<ul>
+								<li><a href="#">item 2.5.1</a></li>
+								<li><a href="#">item 2.5.2</a></li>
+								<li><a href="#">item 2.5.3</a></li>
+								<li><a href="#">item 2.5.4</a></li>
+							</ul>
+						</li>
+					</ul>
+				</li>
+				
+			</ul>
+        </div>
+        
+        <div id="contentCenter" data-options="region:'center', title:'center'" style="width:88%;">
+        	<div id="centerTabs" class="easyui-tabs" data-options="fit:true, border:false, plain:true">
+        	</div>
+        </div>
+        
+    </div>
+</body>
+
+<script th:inline="javascript">
+	$(function(){
+		$("#sysMenu").metisMenu({
+			doubleTapToGo: true
+		});
+		/* $.get([[@{/home/menu}]], function(ListData){
+			$('#sysMenu').tree({
+		    	data: ListData,
+		    	onClick: function(node){
+			   		if(node.attributes != null){
+			   			if(node.attributes.url != null){
+			   				var tabIsExists = $('#centerTabs').tabs("exists", node.text);
+			   				if(tabIsExists){
+			   					// tab已经存在
+			   					$('#centerTabs').tabs("select", node.text);
+			   				}else{
+			   					var content = '<div style="width:100%; height:100%;">';
+				   				content	+= '<iframe src="' + node.attributes.url + '" style="width:100%; height:100%; border:0;"></iframe></div>';
+			   					$('#centerTabs').tabs('add',{
+			    				    title: node.text,
+			    				    content: content,
+			    				    border: false,
+			    				    closable: true,
+			    				}); 
+			   				}
+			   			}
+			   		}
+			   	}
+		    });
+		}); */
+	});
+	
+</script>
+
+
+
+
+
+
+</html>

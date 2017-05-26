@@ -12,7 +12,8 @@ public class EasyuiSysMenuVo {
 
 	}
 
-	public EasyuiSysMenuVo(Integer id, String text, Integer level, Integer type, String url, Integer weight, Integer pId) {
+	public EasyuiSysMenuVo(Integer id, String text, Integer level, Integer type, String url, Integer weight,
+			Integer pId) {
 		super();
 		this.id = id;
 		this.text = text;
@@ -34,32 +35,50 @@ public class EasyuiSysMenuVo {
 		this.pId = pId;
 	}
 
-	// id：节点的 id，它对于加载远程数据很重要
+	/**
+	 * id：节点的 id，它对于加载远程数据很重要
+	 */
 	private Integer id;
 
-	// text：要显示的节点文本
+	/**
+	 * text：要显示的节点文本
+	 */
 	private String text;
 
-	// state：节点状态，'open' 或 'closed'，默认是 'open'.当设置为 'closed'
-	// 时，该节点有子节点，并且将从远程站点加载它们
+	/**
+	 * state：节点状态，'open' 或 'closed'，默认是 'open'.
+	 * 当设置为'closed'时，该节点有子节点，并且将从远程站点加载它们
+	 */
 	private String state;
 
-	// attributes：给一个节点添加的自定义属性
+	/**
+	 * attributes：给一个节点添加的自定义属性
+	 */
 	private Map<String, String> attributes;
 
-	// children：定义了一些子节点的节点数组
+	/**
+	 * children：子节点
+	 */
 	private List<EasyuiSysMenuVo> children;
 
-	// 菜单等级: 1, 一级菜单; 2, 二级菜单; 3, 三级菜单;
+	/**
+	 * 菜单等级: 1, 一级菜单; 2, 二级菜单; 3, 三级菜单;
+	 */
 	private Integer mLevel;
 
-	// 菜单类型: 1, 节点; 2, url;
+	/**
+	 * 菜单类型: 1, 节点; 2, url;
+	 */
 	private Integer mType;
 
-	// 菜单权重, 排序用, 同级菜单weight值越小, 菜单显示时排在前面
+	/**
+	 * 菜单权重, 排序用, 同级菜单weight值越小, 菜单显示时排在前面
+	 */
 	private Integer mWeight;
 
-	// 父菜单id
+	/**
+	 * 父菜单id
+	 */
 	private Integer pId;
 
 	public Integer getId() {
@@ -78,6 +97,7 @@ public class EasyuiSysMenuVo {
 		this.text = text;
 	}
 
+	@JsonIgnore
 	public String getState() {
 		return state;
 	}
@@ -111,7 +131,6 @@ public class EasyuiSysMenuVo {
 		this.mLevel = mLevel;
 	}
 
-	@JsonIgnore
 	public Integer getmType() {
 		return mType;
 	}

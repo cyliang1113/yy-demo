@@ -7,11 +7,13 @@
  * Under MIT License
  */
 
-.metismenu .arrow {
+.metismenu .arrow,
+.metismenu .plus {
   float: right;
   line-height: 1.42857;
 }
-*[dir="rtl"] .metismenu .arrow {
+*[dir="rtl"] .metismenu .arrow, 
+*[dir="rtl"] .metismenu .plus{
   float: left;
 }
 
@@ -27,6 +29,16 @@
   content: "\e114";
 }
 
+.metismenu .glyphicon.plus:before {
+  content: "\002b";
+}
+.metismenu .active > a > .glyphicon.plus:before {
+  content: "\2212";
+}
+
+
+
+
 /*
  * Require Font-Awesome
  * http://fortawesome.github.io/Font-Awesome/
@@ -38,6 +50,7 @@
 .metismenu .active > a > .fa.arrow:before {
   content: "\f107";
 }
+
 
 /*
  * Require Ionicons
