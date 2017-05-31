@@ -7,8 +7,8 @@
 	
 	<script type="text/javascript" th:src="@{/resources/jquery/jquery.min.js}" src="../../../resources/jquery/jquery.min.js"></script>
 	
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap.min.css}"  href="../../../resources/bootstrap/css/bootstrap.min.css">
-	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.min.js}" src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap.css}"  href="../../../resources/bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.js}" src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/metismenu/metisMenu.css}"  href="../../../resources/metismenu/metisMenu.css">
 	<link rel="stylesheet" type="text/css" th:href="@{/resources/metismenu/demo.css}"  href="../../../resources/metismenu/demo.css">
@@ -21,6 +21,8 @@
 	
 	<style type="text/css">
 		/*
+			dashboard
+			
 		 * Base structure
 		 */
 		
@@ -28,8 +30,6 @@
 		body {
 		  padding-top: 50px;
 		}
-		
-		
 		/*
 		 * Global add-ons
 		 */
@@ -70,48 +70,36 @@
 		    border-right: 1px solid #eee;
 		  }
 		}
-		
-		
-		
-		
-		/*
-		 * Main content
-		 */
-		
-		.main {
-		  padding: 20px;
-		}
-		@media (min-width: 768px) {
-		  .main {
-		    padding-right: 40px;
-		    padding-left: 40px;
-		  }
-		}
-		.main .page-header {
-		  margin-top: 0;
-		}
-		
-		
-		/*
-		 * Placeholder dashboard ideas
-		 */
-		
-		.placeholders {
-		  margin-bottom: 30px;
-		  text-align: center;
-		}
-		.placeholders h4 {
-		  margin-bottom: 0;
-		}
-		.placeholder {
-		  margin-bottom: 20px;
-		}
-		.placeholder img {
-		  display: inline-block;
-		  border-radius: 50%;
-		}
-		
+	</style>
 	
+	<style type="text/css">
+		.self-nav-tabs > li > a{
+		    border-left-color: rgb(221, 221, 221);
+		    border-left-style: solid;
+		    border-left-width: 1px;
+		    
+		    border-top-color: rgb(221, 221, 221);
+		    border-top-style: solid;
+		    border-top-width: 1px;
+		    
+		    border-right-color: rgb(221, 221, 221);
+		    border-right-style: solid;
+		    border-right-width: 1px;
+		    
+		    margin: 0px;
+		    
+		    border-radius: 0px 0px 0 0;
+		    
+		    padding: 10px 10px 10px 15px
+		    
+		}
+		
+		.self-nav-tabs > li > a > span{
+			margin-left: 12px;
+		}
+		.self-nav-tabs > li > a > span:hover{
+			cursor: pointer;
+		}
 	
 	</style>
 </head>
@@ -138,23 +126,25 @@
         	<ul id="sysMenu" class="metismenu">
         		<li th:each="lv1Menu : ${menuList}">
         			<a href="#" >
-        				<input th:if="${lv1Menu.mType eq 2}" type="text" style="display: none;" th:value="${lv1Menu.attributes.url}">
-        				<span th:text="${lv1Menu.text}">菜单 1</span>
+        				<input class="menuId" type="text" style="display: none;" th:value="${lv1Menu.id}">
+        				<input class="menuUrl" th:if="${lv1Menu.mType eq 2}" type="text" style="display: none;" th:value="${lv1Menu.attributes.url}">
+        				<span class="menuName" th:text="${lv1Menu.text}">菜单 1</span>
         				<span th:if="${lv1Menu.children}" class="glyphicon arrow"></span>
         			</a>
         			<ul th:if="${lv1Menu.children}">
         				<li th:each="lv2Menu : ${lv1Menu.children}">
         					<a href="#" >
-        						<input th:if="${lv2Menu.mType eq 2}" th:value="${lv2Menu.attributes.url}" type="text" style="display: none;">
-        						<span th:text="${lv2Menu.text}">菜单1.1</span>
+        						<input class="menuId" type="text" style="display: none;" th:value="${lv2Menu.id}">
+        						<input class="menuUrl"  th:if="${lv2Menu.mType eq 2}" th:value="${lv2Menu.attributes.url}" type="text" style="display: none;">
+        						<span class="menuName"  th:text="${lv2Menu.text}">菜单1.1</span>
         						<span th:if="${lv2Menu.children}" class="glyphicon plus"></span>
         					</a>
         					<ul th:if="${lv2Menu.children}">
         						<li th:each="lv3Menu : ${lv2Menu.children}">
         							<a href="#" >
-        								<input th:if="${lv3Menu.mType eq 2}" th:value="${lv3Menu.attributes.url}" type="text" style="display: none;">
-        								<span th:text="${lv3Menu.text}">菜单1.1.1</span>
-        								<span th:if="${lv3Menu.children}" class="glyphicon plus"></span>
+        								<input class="menuId" type="text" style="display: none;" th:value="${lv3Menu.id}">
+        								<input class="menuUrl"  th:if="${lv3Menu.mType eq 2}" th:value="${lv3Menu.attributes.url}" type="text" style="display: none;">
+        								<span class="menuName" th:text="${lv3Menu.text}">菜单1.1.1</span>
         							</a>
         						</li>
         					</ul>
@@ -165,13 +155,13 @@
         </div>
         
         <!-- main -->
-        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-          <h1 class="page-header">Content</h1>
-
-          
-
-          <h2 class="sub-header">Section title</h2>
-          
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main" style="padding: 0px;">
+        	<ul id="myTabs" class="nav nav-tabs self-nav-tabs">
+				
+			</ul>
+        	<div id="myTabContents" class="tab-content">
+				
+			</div>
         </div>
       </div>
     </div>
@@ -180,17 +170,83 @@
 
 <script th:inline="javascript">
 	$(function(){
-		$("#sysMenu").metisMenu({
-			doubleTapToGo: true
-		});
+		$("#sysMenu").metisMenu();
 		
 		$("#sysMenu a").on('click', function() {
-			if($(this).children("input")[0]){
-				var url = $(this).children("input")[0].value;
-				console.debug(url)
-				window.location = url;
+			if($(this).children(".menuUrl")[0]){
+				var id = $(this).children(".menuId").val();
+				var url = $(this).children(".menuUrl").val();
+				var name = $(this).children(".menuName").text();
+				
+				var $tab = $("#tabId" + id);
+				if($tab[0]){
+					// 已经存在选中
+					
+				}else{
+					// 不存在打开
+					var tab = '<li id="tabId'+ id +'"><a href="#tabContent' + id + '" data-toggle="tab">' + name + '<span class="glyphicon glyphicon-remove myTabClose"></span></a></li>';
+					$("#myTabs").append(tab);
+					
+					var tabContent = '<div class="tab-pane" id="tabContent' + id + '">'
+						+ '<iframe src="' + url + '" style="width:100%; height:720px; border:0;"></iframe></div>'
+						+ '</div>';
+						
+					$("#myTabContents").append(tabContent);
+				}
+				
+				$("#myTabs li").removeClass("active");
+				$("#myTabContents div").removeClass("in active");
+				
+				$("#tabId" + id).addClass("active")
+				$("#tabContent" + id).addClass("in active")
+				
+				
+
 			}
 		});
+		
+		$(".self-nav-tabs").on("click", ".myTabClose", function(){
+			var $tab = $(this).parent().parent();
+			if($tab.attr("class")){
+				// 关闭 active的tab
+				var $tabNext = $tab.next();
+				var $tabPrev = $tab.prev();
+				if($tabNext.length){
+					var tabId = $tab.attr("id").substring(5)
+					$tab.remove();
+					$("#tabContent" + tabId).remove();
+					
+					
+					$tabNext.addClass("active")
+					var tabNextId = $tabNext.attr("id").substring(5)
+					$("#tabContent" + tabNextId).addClass("in active")
+					
+				}else if($tabPrev.length){
+					var tabId = $tab.attr("id").substring(5)
+					$tab.remove();
+					$("#tabContent" + tabId).remove();
+					
+					$tabPrev.addClass("active")
+					var tabPrevtId = $tabPrev.attr("id").substring(5)
+					$("#tabContent" + tabPrevtId).addClass("in active")
+					
+				}else{
+					var tabId = $tab.attr("id").substring(5)
+					$tab.remove();
+					$("#tabContent" + tabId).remove();
+				}
+	
+				
+			}else{
+				// 关闭 非active的tab
+				var tabId = $tab.attr("id").substring(5)
+				$tab.remove();
+				$("#tabContent" + tabId).remove();
+			}
+			
+		});
+		
+
 	});
 </script>
 
