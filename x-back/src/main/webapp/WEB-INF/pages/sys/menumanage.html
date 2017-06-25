@@ -3,45 +3,147 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>home</title>
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/easyui/themes/material/easyui.css}" href="../../themes/default/easyui.css">
-	<link rel="stylesheet" type="text/css" th:href="@{/resources/easyui/themes/icon.css}" href="../../themes/icon.css">
-	<script type="text/javascript" th:src="@{/resources/easyui/jquery.min.js}" src="../../jquery.min.js"></script>
-	<script type="text/javascript" th:src="@{/resources/easyui/jquery.easyui.min.js}" src="../../jquery.easyui.min.js"></script>
+	<title>系统菜单管理</title>
+	
+	<!-- jquery -->
+	<script type="text/javascript" th:src="@{/resources/jquery/jquery.min.js}" src="../../../resources/jquery/jquery.min.js"></script>
+	
+	<!-- boostrap -->
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstrap/css/bootstrap.css}"  href="../../../resources/bootstrap/css/bootstrap.min.css">
+	<script type="text/javascript" th:src="@{/resources/bootstrap/js/bootstrap.js}" src="../../../resources/bootstrap/js/bootstrap.min.js"></script>
+	
+	<!-- boostrap table -->
+	<link rel="stylesheet" type="text/css" th:href="@{/resources/bootstraptable/bootstrap-table.css}"  href="../../../resources/bootstraptable/bootstrap-table.css">
+	<script type="text/javascript" th:src="@{/resources/bootstraptable/bootstrap-table.js}" src="../../../resources/bootstraptable/bootstrap-table.js"></script>
+	<script type="text/javascript" th:src="@{/resources/bootstraptable/locale/bootstrap-table-zh-CN.js}" src="../../..//resources/bootstraptable/locale/bootstrap-table-zh-CN.js"></script>
+	
+	
 </head>
 
 <body>
-	<div class="easyui-layout" style="width: 98%; padding-left: 8px;">
-		<div id="tb" style="padding:8px 0px;">
-			菜单名称: <input name="menuName" class="easyui-textbox" style="width:150px;">
-			菜单等级: 
-		    <select name="menuLevel" class="easyui-combobox" panelHeight="auto" style="width:100px">
-		        <option value="1">一级</option>
-		        <option value="2">二级</option>
-		        <option value="3">三级</option>
-		    </select>
-			菜单类型:
-			<select name="menuType" class="easyui-combobox" panelHeight="auto" style="width:100px">
-		        <option value="1">节点</option>
-		        <option value="2">url</option>
-		    </select>
-		    <a id="searchButton" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="panel-body">
+		        <form id="searchForm" class="form-horizontal">
+		            <div class="form-group">
+		                <label class="control-label col-sm-1" for="txt_search_departmentname">菜单名称</label>
+		                <div class="col-sm-2">
+		                    <input name="menuName" type="text" class="form-control" id="menuName">
+		                </div>
+		                <label class="control-label col-sm-1" for="txt_search_statu">菜单等级</label>
+		                <div class="col-sm-2">
+		                	<select name="menuLevel" class="form-control" id="menuLevel">
+		                		
+						        <option value="">请选择</option>
+						        <option th:if="${sysMemuLevelArr}" th:each="sysMemuLevel : ${sysMemuLevelArr}" th:value="${sysMemuLevel.code}" th:text="${sysMemuLevel.cnName}"></option>
+						        
+						    </select>
+		                </div>
+		                <label class="control-label col-sm-1" for="txt_search_statu">菜单类型</label>
+		                <div class="col-sm-2">
+		                    <select name="menuType" class="form-control" id="menuType">
+						        <option value="">请选择</option>
+						     	<option th:if="${sysMemuTypeArr}" th:each="sysMemuType : ${sysMemuTypeArr}" th:value="${sysMemuType.code}" th:text="${sysMemuType.cnName}"></option>
+						    </select>
+		                </div>
+		                <div class="col-sm-3">
+		                    <button type="button" style="margin-left:50px" id="btn_query" class="btn btn-primary">查询</button>
+		                </div>
+		            </div>
+		        </form>
+		    </div>
 		</div>
-		<table id="dg"></table>
+		<div class="row">
+			<div class="panel-body">
+				<table id="dataTable"></table>
+			</div>
+		</div>
+		<!-- 菜单编辑弹框 -->
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+							&times;
+						</button>
+						<h4 class="modal-title" id="myModalLabel">
+							模态框（Modal）标题
+						</h4>
+					</div>
+					<div class="modal-body">
+						在这里添加一些文本
+					</div>
+					<div class="modal-footer">		
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+						</button>
+						<button type="button" class="btn btn-primary">
+							提交更改
+						</button>
+					</div>
+				</div><!-- /.modal-content -->						
+			</div>
+		</div>
 	</div>
 </body>
 
 
 <script th:inline="javascript">
+	var click_count = 0;
 	$(function(){
-		$("#searchButton").on('click', function() {
-			$("#dg").datagrid({
-				fitColumns: true,
-				rownumbers: true,
-				columns: [ [
-				    {field:'menuName', title: '菜单名称', width: 50},
-			    	{field:'menuLevel', title: '菜单等级', width: 40, 
-				     formatter: function(value,row,index){
+		$("#btn_query").on('click', function(){
+			if(click_count == 0){
+				// 第一次点击
+				initTable()
+				click_count = click_count + 1
+			}else{
+				$('#dataTable').bootstrapTable('selectPage', 1);
+			}
+		});
+		
+		$("#dataTable").on('click', '.btn_edit' ,function(){
+			var menuId = $(this).next().val();
+			$("#myModal").modal({
+				keyboard: false
+			})
+		});
+	});
+	
+	
+	function initTable(){
+		var url = [[@{/sysmanage/menumanage/load}]]
+		$('#dataTable').bootstrapTable({
+			method: 'POST',
+	        dataType: 'json',
+	        contentType: "application/x-www-form-urlencoded",
+	        cache: false,
+	        striped: true,                      //是否显示行间隔色
+	        sidePagination: "server",           //分页方式：client客户端分页，server服务端分页（*）
+	        pagination: true,
+	        url: url,
+	       	queryParams : queryParams,
+	        pageNumber: 1,                       //初始化加载第一页，默认第一页
+	        pageSize: 10,                       //每页的记录行数（*）
+	        pageList: [10, 25, 50, 100],        //可供选择的每页的行数（*）
+	        responseHandler: responseHandler,
+	        columns: [
+	        	{
+	                field: '',
+                    title: 'No.',
+                    formatter: function (value, row, index) {
+                    	return index+1;
+	                }
+	            },
+	            {
+	                field : 'menuName',
+	                title : '菜单名称',
+	                align : 'left',
+	                valign : 'middle'
+	            }, {
+	                field : 'menuLevel',
+	                title : '菜单等级',
+	                align : 'left',
+	                valign : 'middle',
+	                formatter: function(value, row, index){
 						if (row.menuLevel == 1){
 							return "一级菜单";
 						}
@@ -52,56 +154,69 @@
 							return "三级菜单";
 						}
 					 }
-				    },
-			    	{field:'menuType', title: '菜单类型', width: 40,
-					 formatter: function(value,row,index){
+	            }, {
+	                field : 'menuType',
+	                title : '菜单类型',
+	                align : 'left',
+	                valign : 'middle',
+	                formatter: function(value, row, index){
 						if (row.menuType == 1){
 							return "节点";
 						}
 						if(row.menuType == 2){
 							return "url";
 						}
-					 }	
-			    	},
-			    	{field:'menuUrl', title: '菜单url', width: 70},
-			    	{field:'operate', title: '操作', width: 50,
-		    		 formatter: function(value,row,index){
-		    		 	var str = "";
-						str += "<a href='#' style='text-decoration: none; color: #05569d;'>修改</a>";
+					}	
+	            }, {
+	                field : 'menuUrl',
+	                title : '菜单url',
+	                align : 'left',
+	                valign : 'middle'
+	            }, {
+	                field : 'operate',
+	                title : '操作',
+	                align : 'left',
+	                valign : 'middle',
+	                formatter : function (value, row, index){
+	                	var str = "";
+						str += "<a href='javascript:void(0)' class='btn_edit' style='text-decoration: none; color: #05569d;'>修改</a>";
+						str += "<input type='hidden' value='" + row.id + "'>";
 						if (row.menuType == 1 && (row.menuLevel == 1 || row.menuLevel == 2)){
-							str += "&nbsp;<a href='#' style='text-decoration: none; color: #05569d;'>子菜单</a>";
+							str += "&nbsp;<a href='javascript:void(0)' style='text-decoration: none; color: #05569d;'>子菜单</a>";
+							str += "<input type='hidden' value='" + row.id + "'>";
 						}
 						return str;
-					 }
-			    	}
-				] ],
-				url: [[@{/sysmanage/menumanage/load}]],
-				queryParams: {
-					"menuName": $("input[name='menuName']").val(),
-					"menuLevel": $("input[name='menuLevel']").val(),
-					"menuType": $("input[name='menuType']").val()
-				},
-				loadFilter: function(page){
-					var data = {};
-					data["total"] = page.total;
-					data["rows"] = page.items;
-					return data;
-				},
-			    singleSelect: true,
-				//border: false,
-				pagination: true,
-				pageList: [15, 50, 100],
-			    pageSize: 15
-			});
-			var p = $('#dg').datagrid('getPager');
-			$(p).pagination({
-			   	beforePageText: '第',
-			   	afterPageText: '页	共 {pages} 页',
-			   	showRefresh: false,
-			   	displayMsg: '共 {total} 条记录',
-			});
+	                }
+	            }
+	    	]
+			
 		});
-	});
+	}
+	
+	function queryParams(){
+		var param = {
+			menuName: $("#menuName").val(),
+			menuLevel: $("#menuLevel").val(),
+			menuType: $("#menuType").val(),
+			currentPage : this.pageNumber,
+	        pageSize : this.pageSize
+	    }
+	    return param;
+	}
+	
+	function responseHandler(res) { 
+	    if (res) {
+	        return {
+	            "rows" : res.items,
+	            "total" : res.total
+	        };
+	    } else {
+	        return {
+	            "rows" : [],
+	            "total" : 0
+	        };
+	    }
+	}
 	
 
 </script>

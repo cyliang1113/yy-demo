@@ -8,10 +8,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.leo.xback.common.Constant;
+import cn.leo.xback.common.Constant.SysMemuLevel;
+import cn.leo.xback.common.Constant.SysMemuType;
 import cn.leo.xback.common.Page;
 import cn.leo.xback.po.sys.SysMenu;
 import cn.leo.xback.service.sys.SysMenuService;
@@ -26,7 +29,13 @@ public class SysMenuManageController {
 
 	// 菜单管理页
 	@RequestMapping({ "/page" })
-	public String sysMenuManage() {
+	public String sysMenuManage(Model model) {
+		SysMemuLevel[] sysMemuLevelArr = Constant.SysMemuLevel.values();
+		SysMemuType[] sysMemuTypeArr = Constant.SysMemuType.values();
+
+		model.addAttribute("sysMemuLevelArr", sysMemuLevelArr);
+		model.addAttribute("sysMemuTypeArr", sysMemuTypeArr);
+
 		return "sys/menumanage";
 	}
 
@@ -49,12 +58,17 @@ public class SysMenuManageController {
 		params.put("orderType", "desc");
 
 		if (page.getCurrentPage() != null && page.getCurrentPage() >= 1) {
-			if (page.getPageSize() != null && page.getPageSize() >= Constant.DEFAULT_PAGE_SIZE) {
-				Long start = (page.getCurrentPage() - 1) * page.getPageSize();
-				Long end = page.getPageSize();
-				params.put("start", start);
-				params.put("end", end);
-			}
+			Long start = (page.getCurrentPage() - 1) * page.getPageSize();
+			params.put("start", start);
+		} else {
+			params.put("start", 0);
+		}
+
+		if (page.getPageSize() != null && page.getPageSize() >= 1) {
+			Long end = page.getPageSize();
+			params.put("end", end);
+		} else {
+			params.put("end", Constant.DEFAULT_PAGE_SIZE);
 		}
 
 		List<SysMenu> items = sysMenuService.selectByParams(params);
