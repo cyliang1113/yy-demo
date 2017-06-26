@@ -11,6 +11,18 @@
 		<result column="menu_weight" property="menuWeight" />
 		<result column="parent_menu_id" property="parentMenuId" />
 	</resultMap>
+	
+	<update id="updateSysMenu" parameterType="cn.leo.xback.po.sys.SysMenu">
+	    update t_sys_menu
+	    <trim prefix="set" prefixOverrides=",">
+	    	menu_name = #{menuName}
+			<if test="menuUrl != null">
+				, menu_url = #{menuUrl}
+		   	</if>
+		</trim>
+		WHERE id = #{id}
+	</update>
+	
 
 	<select id="selectAll" resultMap="SysMenuResultMap">
 		select * from t_sys_menu
@@ -19,6 +31,9 @@
 	<sql id="selectByConditions">
 		select * from t_sys_menu
 		<trim prefix="where" prefixOverrides="and">
+			<if test="id != null">
+		        id like #{id}
+		     </if>
 			<if test="menuName != null">
 		        menu_name like #{menuName}
 		     </if>
@@ -53,7 +68,7 @@
 				, #{end}
 			</if>
 			<if test="end == null">
-				, 15
+				, 10
 			</if>
 		</trim>
 	</select>

@@ -29,6 +29,16 @@ public class Constant {
 			return this.cnName;
 		}
 
+		public static String getCnNameByCode(int code) {
+			SysMemuLevel[] values = SysMemuLevel.values();
+			for (SysMemuLevel v : values) {
+				if (v.getCode() == code) {
+					return v.getCnName();
+				}
+			}
+			return null;
+		}
+
 	}
 
 	/**
@@ -53,6 +63,15 @@ public class Constant {
 			return this.cnName;
 		}
 
+		public static String getCnNameByCode(int code) {
+			SysMemuType[] values = SysMemuType.values();
+			for (SysMemuType v : values) {
+				if (v.getCode() == code) {
+					return v.getCnName();
+				}
+			}
+			return null;
+		}
 	}
 
 }

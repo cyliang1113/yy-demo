@@ -2,6 +2,8 @@ package cn.leo.xback.po.sys;
 
 import java.util.List;
 
+import cn.leo.xback.common.Constant;
+
 /**
  * 系统菜单, 菜单最多为三级, 一级菜单一定是节点, 二级菜单可以是节点或url, 三级菜单一定是url
  */
@@ -104,4 +106,17 @@ public class SysMenu {
 	public void setChildrenMenu(List<SysMenu> childrenMenu) {
 		this.childrenMenu = childrenMenu;
 	}
+
+	public String getMenuLevelCnName() {
+		return Constant.SysMemuLevel.getCnNameByCode(this.menuLevel);
+	}
+
+	public String getMenuTypeCnName() {
+		return Constant.SysMemuType.getCnNameByCode(this.menuType);
+	}
+	
+	public boolean getIsUrlMenu(){
+		return Constant.SysMemuType.URL_MENU.getCode() == this.menuType;
+	}
+
 }

@@ -11,4 +11,6 @@ public interface SysMenuService {
 	public List<SysMenu> selectByParams(Map<String, Object> paramsMap);
 
 	public Long selectByParamsCount(Map<String, Object> paramsMap);
+	
+	public Long updateSysMenu(SysMenu sysMenu);
 }

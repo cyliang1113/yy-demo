@@ -31,4 +31,9 @@ public class SysMenuServiceImpl implements SysMenuService {
 		return mapper.selectByParamsCount(paramsMap);
 	}
 
+	@Override
+	public Long updateSysMenu(SysMenu sysMenu) {
+		return mapper.updateSysMenu(sysMenu);
+	}
+
 }

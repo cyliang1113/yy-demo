@@ -1,0 +1,86 @@
+<div class="modal-dialog">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+				&times;
+			</button>
+			<h4 class="modal-title">
+				菜单编辑
+			</h4>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+				<div class="panel-body">
+					<form id="editForm" class="form-horizontal">
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="txt_search_departmentname">菜单名称</label>
+				            <div class="col-sm-8">
+				                <input id="edit_menuName" type="text" class="form-control" th:value="${sysMenu.menuName}">
+				            </div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="txt_search_departmentname">菜单等级</label>
+				            <div class="col-sm-8">
+				                <input name="" type="text" class="form-control" th:value="${sysMenu.menuLevelCnName}" disabled="disabled">
+				            </div>
+						</div>
+						<div class="form-group">
+							<label class="control-label col-sm-2" for="txt_search_departmentname">菜单类型</label>
+				            <div class="col-sm-8">
+				                <input name="" type="text" class="form-control" th:value="${sysMenu.menuTypeCnName}" disabled="disabled">
+				            </div>
+						</div>
+						<div class="form-group" th:if="${sysMenu.isUrlMenu}">
+							<label class="control-label col-sm-2" for="txt_search_departmentname">菜单url</label>
+				            <div class="col-sm-8">
+				                <input id="edit_menuUrl" type="text" class="form-control" th:value="${sysMenu.menuUrl}">
+				            </div>
+						</div>
+						<input type="hidden" id="edit_menuId" th:value="${sysMenu.id}">
+					</form>
+				</div>
+				
+	        </div>
+		</div>
+		<div class="modal-footer">		
+			<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+			</button>
+			<button type="button" class="btn btn-primary" id="btn_edit_save">
+				提交更改
+			</button>
+		</div>
+	</div>				
+</div>
+
+<script th:inline="javascript">
+	$("#btn_edit_save").on('click', function(){
+		var updateData = {};
+		updateData["id"] = $("#edit_menuId").val();
+		updateData["menuName"] = $("#edit_menuName").val();
+		if([[${sysMenu.isUrlMenu}]]){
+			updateData["menuUrl"] = $("#edit_menuUrl").val();
+		}
+		var url = [[@{/sysmanage/menumanage/menuedit/save}]]
+		
+		$.post(url, 
+			updateData,
+			function(data){
+				// 关闭弹窗
+				$("#menuEditModal").modal('hide');
+				// 保存成功提示框
+				$("#alert_save_success").modal(
+					{ 
+						keyboard: false
+					}
+				);
+				window.setTimeout(function(){
+					$("#alert_save_success").modal('hide');
+				}, 1500);
+				// 刷新表格
+				$('#dataTable').bootstrapTable("refresh");
+			}
+		)
+		
+	});
+
+</script>
