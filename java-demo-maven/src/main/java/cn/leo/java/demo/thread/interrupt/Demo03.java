@@ -7,11 +7,11 @@ public class Demo03 {
 
 		thread.start();
 
-		Thread.sleep(2000);
+		Thread.sleep(1000);
 
 		thread.setStop();
 
-		Thread.sleep(5000);
+		thread.join();
 
 	}
 
@@ -23,13 +23,12 @@ public class Demo03 {
 			int i = 0;
 			while (!stop) {
 				i++;
-				System.out.println("Thread3");
 			}
 			System.out.println(i);
 		}
 
 		public void setStop() {
-			System.out.println("stop");
+			System.out.println("setStop");
 			this.stop = true;
 		}
 	}
