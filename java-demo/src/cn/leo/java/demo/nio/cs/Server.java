@@ -16,13 +16,11 @@ import java.util.Iterator;
 
 public class Server {
 	public static void main(String[] args) {
-		InetSocketAddress inetSocketAddress = null;
 		ServerSocketChannel serverSocketChannel = null;
 		Selector selector = null;
 		try {
-			inetSocketAddress = new InetSocketAddress("10.112.1.15", 9999);
 			serverSocketChannel = ServerSocketChannel.open();
-			serverSocketChannel.bind(inetSocketAddress);
+			serverSocketChannel.bind(new InetSocketAddress("127.0.0.1", 9999));
 			serverSocketChannel.configureBlocking(false);
 
 			selector = Selector.open();
@@ -43,7 +41,7 @@ public class Server {
 						SocketChannel socketChannel = serverSocketChannel2.accept();
 						socketChannel.configureBlocking(false);
 						socketChannel.register(selector, SelectionKey.OP_READ);
-						System.out.println("有客户端连接----" + (new Date()).toLocaleString());
+						System.out.println("有客户端连接----");
 					} else if (key.isReadable()) {
 						SocketChannel socketChannel = (SocketChannel) key.channel();
 
@@ -54,9 +52,9 @@ public class Server {
 
 						System.out.println("from client: " + decoder.decode(bb).toString());
 
-						CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
-
-						socketChannel.write(encoder.encode(CharBuffer.wrap("ok")));
+//						CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
+//
+//						socketChannel.write(encoder.encode(CharBuffer.wrap("ok")));
 					}
 				}
 			}
