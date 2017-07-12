@@ -9,10 +9,12 @@ public class TimeClientHandler extends ChannelHandlerAdapter {
 
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
-		String str = "what time?";
-		ByteBuf buf = Unpooled.buffer(str.length());
-		buf.writeBytes(str.getBytes());
-		ctx.writeAndFlush(buf);
+		for (int i = 0; i < 100; i++) {
+			String str = "what time?";
+			ByteBuf buf = Unpooled.buffer(str.length());
+			buf.writeBytes(str.getBytes());
+			ctx.writeAndFlush(buf);
+		}
 	}
 
 	@Override
