@@ -23,7 +23,14 @@ public class TimeServer {
 			b.group(bossGroup, workerGroup);
 			b.channel(NioServerSocketChannel.class);
 			b.option(ChannelOption.SO_BACKLOG, 1024);
-			b.childHandler(new ChildChannelHandler());
+			b.childHandler(new ChannelInitializer<SocketChannel>() {
+				@Override
+				protected void initChannel(SocketChannel ch) throws Exception {
+					ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+					ch.pipeline().addLast(new StringDecoder());
+					ch.pipeline().addLast(new TimeServerHandler());
+				}
+			});
 
 			ChannelFuture f = b.bind(port).sync();
 
@@ -34,17 +41,6 @@ public class TimeServer {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
-	}
-
-	private class ChildChannelHandler extends ChannelInitializer<SocketChannel> {
-
-		@Override
-		protected void initChannel(SocketChannel ch) throws Exception {
-			ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
-			ch.pipeline().addLast(new StringDecoder());
-			ch.pipeline().addLast(new TimeServerHandler());
-		}
-
 	}
 
 	public static void main(String[] args) {
