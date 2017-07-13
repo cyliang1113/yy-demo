@@ -1,4 +1,4 @@
-package cn.leo.netty.demo.timeserver;
+package cn.leo.netty.demo.timeserver.nozhanchaibao;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -8,6 +8,8 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
+import io.netty.handler.codec.LineBasedFrameDecoder;
+import io.netty.handler.codec.string.StringDecoder;
 
 public class TimeServer {
 	public void bind(int port) {
@@ -38,7 +40,8 @@ public class TimeServer {
 
 		@Override
 		protected void initChannel(SocketChannel ch) throws Exception {
-			// TODO Auto-generated method stub
+			ch.pipeline().addLast(new LineBasedFrameDecoder(1024));
+			ch.pipeline().addLast(new StringDecoder());
 			ch.pipeline().addLast(new TimeServerHandler());
 		}
 
