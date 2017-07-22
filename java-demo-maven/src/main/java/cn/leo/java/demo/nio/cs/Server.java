@@ -17,6 +17,7 @@ import java.util.Iterator;
 public class Server {
 	public static void main(String[] args) {
 		ServerSocketChannel serverSocketChannel = null;
+		SocketChannel socketChannel = null;
 		Selector selector = null;
 		try {
 			serverSocketChannel = ServerSocketChannel.open();
@@ -37,20 +38,29 @@ public class Server {
 					iterator.remove();
 
 					if (key.isAcceptable()) {
+						System.out.println("Accept----");
 						ServerSocketChannel serverSocketChannel2 = (ServerSocketChannel) key.channel();
-						SocketChannel socketChannel = serverSocketChannel2.accept();
+						socketChannel = serverSocketChannel2.accept();
 						socketChannel.configureBlocking(false);
 						socketChannel.register(selector, SelectionKey.OP_READ);
-						System.out.println("有客户端连接----");
 					} else if (key.isReadable()) {
-						SocketChannel socketChannel = (SocketChannel) key.channel();
+						System.out.println("Read----");
+						socketChannel = (SocketChannel) key.channel();
 
 						ByteBuffer bb = ByteBuffer.allocate(50);
-						socketChannel.read(bb);
-						bb.flip();
-						CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder();
-
-						System.out.println("from client: " + decoder.decode(bb).toString());
+						while(true){
+							int read = socketChannel.read(bb);
+							if(read <= 0){
+								if(read < 0){
+									socketChannel.close();
+								}
+								break;
+							}
+							bb.flip();
+							CharsetDecoder decoder = Charset.forName("UTF-8").newDecoder();
+							System.out.println("from client: " + decoder.decode(bb).toString());
+						}
+						
 
 //						CharsetEncoder encoder = Charset.forName("UTF-8").newEncoder();
 //
