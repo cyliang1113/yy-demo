@@ -10,7 +10,10 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 
 public class TimeServer {
-	public void bind(int port) {
+
+	public static void main(String[] args) {
+		int port = 9999;
+
 		EventLoopGroup bossGroup = null;
 		EventLoopGroup workerGroup = null;
 		try {
@@ -38,10 +41,6 @@ public class TimeServer {
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
 		}
-	}
 
-	public static void main(String[] args) {
-		int port = 9999;
-		new TimeServer().bind(port);
 	}
 }
