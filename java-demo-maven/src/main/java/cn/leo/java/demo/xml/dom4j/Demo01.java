@@ -21,12 +21,13 @@ public class Demo01 {
 		String encoding = document.getXMLEncoding();
 		System.out.println(encoding);
 		
-		Element re = document.getRootElement();
+		Element root = document.getRootElement();
 		
-		List<Element> elements = re.elements();
+		List<Element> elements = root.elements();
 		for (Element e : elements) {
 			System.out.println("element name: " + e.getName());
 			System.out.println("element NamespacePrefix: " + e.getNamespacePrefix());
+			System.out.println("element NamespaceURI: " + e.getNamespaceURI());
 		}
 
 	}

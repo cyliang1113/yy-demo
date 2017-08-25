@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <books xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:ex="http://code.alibabatech.com/schema/dubbo"
+       xmlns:ex="http://code.alibabatech.com/schema/ex"
        xmlns:ei="http://code.alibabatech.com/schema/ei"
        xsi:schemaLocation="">
        
