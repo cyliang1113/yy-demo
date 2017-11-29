@@ -18,9 +18,12 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.apache.log4j.Logger;
 
 public class HttpUtils {
 	public static final String charset = "UTF-8";
+	
+	public static final Logger logger = Logger.getLogger(HttpUtils.class);
 	
 	public static void main(String[] args) {
 		String url = "http://10.200.3.232:14466/payment/pay/zbankInstalApp.do";
@@ -48,7 +51,7 @@ public class HttpUtils {
 			String msg = EntityUtils.toString(entity, charset);
 			result.msg = msg;
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.error("http请求异常.", e);
 		} finally {
 			if (response != null) {
 				try {
@@ -89,7 +92,7 @@ public class HttpUtils {
 			String msg = EntityUtils.toString(entity, charset);
 			result.msg = msg;
 		} catch (Exception e) {
-			System.out.println(e);
+			logger.error("http请求异常.", e);
 		} finally {
 			if (response != null) {
 				try {
