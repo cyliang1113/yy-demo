@@ -48,20 +48,20 @@ public class HttpUtils {
 			String msg = EntityUtils.toString(entity, charset);
 			result.msg = msg;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e);
 		} finally {
 			if (response != null) {
 				try {
 					response.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.out.println(e);
 				}
 			}
 			if(httpClient != null){
 				try {
 					httpClient.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.out.println(e);
 				}
 			}
 		}
@@ -89,20 +89,20 @@ public class HttpUtils {
 			String msg = EntityUtils.toString(entity, charset);
 			result.msg = msg;
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e);
 		} finally {
 			if (response != null) {
 				try {
 					response.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.out.println(e);
 				}
 			}
 			if(httpClient != null){
 				try {
 					httpClient.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					System.out.println(e);
 				}
 			}
 		}
