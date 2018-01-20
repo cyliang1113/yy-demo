@@ -21,7 +21,7 @@ import cn.leo.xback.service.sys.SysMenuService;
 @Controller
 @RequestMapping("/sysmanage/menumanage")
 public class SysMenuManageController {
-	// private final Log logger = LogFactory.getLog(getClass());
+	 // private final Log logger = LogFactory.getLog(getClass());
 
 	@Autowired
 	private SysMenuService sysMenuService;
@@ -105,8 +105,7 @@ public class SysMenuManageController {
 	@RequestMapping({ "/menuedit/save" })
 	@ResponseBody
 	public String load(SysMenu menu) {
-		@SuppressWarnings("unused")
-		Long n = sysMenuService.updateSysMenu(menu);
+		sysMenuService.updateSysMenu(menu);
 		return "ok";
 	}
 
