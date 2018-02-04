@@ -14,11 +14,15 @@ import java.util.List;
 public class Demo01 {
 
 	public static void main(String[] args) {
+		int m1 = 1 * 1024 * 1024;
+		int m5 = 5 * 1024 * 1024;
+		
+		
 		List<byte[]> list = new ArrayList<byte[]>();
 		int i = 1;
 		for (;;) {
 			System.out.println(i++);
-			list.add(new byte[1 * 1024 * 1024]);
+			list.add(new byte[m5]);
 		}
 	}
 }
