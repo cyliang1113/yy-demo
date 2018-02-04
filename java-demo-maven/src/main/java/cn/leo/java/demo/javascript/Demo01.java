@@ -15,6 +15,9 @@ import sun.org.mozilla.javascript.internal.NativeArray;
 /** * 直接调用js代码 */
 public class Demo01 {
 	public static void main(String[] args) throws Exception {
+		/**
+
+		
 		ScriptEngineManager manager = new ScriptEngineManager();
 		ScriptEngine engine = manager.getEngineByName("javascript");
 		String jsFileName = "/cn/leo/java/demo/javascript/Demo01.js"; // 读取js文件
@@ -47,6 +50,6 @@ public class Demo01 {
 		System.out.println(signParamsArr);
 		Object signMethodName = String.valueOf(engine.get("signMethodName"));
 		System.out.println(signMethodName);
-
+ */
 	}
 }
