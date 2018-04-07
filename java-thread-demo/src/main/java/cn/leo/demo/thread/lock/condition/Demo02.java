@@ -6,6 +6,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 /*
  * 三个线程交替执行
+ * 
  */
 public class Demo02 {
 	public static void main(String[] args) {
