@@ -5,15 +5,17 @@
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
 	
-	<!-- spring核心Listener -->
+	<!-- spring核心Listener 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	<!-- spring配置文件 -->
+	-->
+	<!-- spring配置文件 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
 	</context-param>
+	-->
 	
 	<!-- spring mvc servlet -->
 	<servlet>
