@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.leo.mybatisdemo.dao.UserUserDao">
+
+	<resultMap id="userUserResultMap" type="cn.leo.mybatisdemo.po.UserUser">
+		<id column="id" property="id" />
+		<result column="user_id" property="userId" />
+		<result column="username" property="username" />
+		<result column="cellphone" property="cellphone" />
+	</resultMap>
+	
+	<select id="findByUserId" resultMap="userUserResultMap" parameterType="long">
+		SELECT user_id, username, cellphone
+		FROM t_user_user 
+		where user_id = #{userId}
+	</select>
+	
+</mapper>
