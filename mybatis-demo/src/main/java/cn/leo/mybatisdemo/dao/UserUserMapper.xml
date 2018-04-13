@@ -15,4 +15,17 @@
 		where user_id = #{userId}
 	</select>
 	
+	<sql id="queryCondition">
+		<where> 
+		    <if test="username != null">
+		         username = #{username}
+		    </if> 
+		    <if test="cellphone != null">
+		        AND cellphone =  #{cellphone}
+		    </if>
+	  	</where>
+	</sql>
+	
+	
+	
 </mapper>

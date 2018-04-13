@@ -61,13 +61,13 @@
 			</if>
 		</if>
 		<trim prefix="limit" prefixOverrides=",">
-			<if test="start != null">
+			<if test="start != null and stat != ''">
 				#{start}
 			</if>
-			<if test="end != null">
+			<if test="end != null and end != ''">
 				, #{end}
 			</if>
-			<if test="end == null">
+			<if test="end == null or end == ''">
 				, 10
 			</if>
 		</trim>
