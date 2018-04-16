@@ -8,9 +8,9 @@ package cn.leo.demo.thread.sync;
 public class Demo01 {
 	public static void main(String[] args) {
 
-		PrintMsg printMsg = new PrintMsg();
+		Demo01PrintMsg printMsg = new Demo01PrintMsg();
 
-		new MyThread1(printMsg).start();
+		new Demo01MyThread(printMsg).start();
 
 		printMsg.printNum();
 
@@ -18,10 +18,10 @@ public class Demo01 {
 
 }
 
-class MyThread1 extends Thread {
-	private PrintMsg pm;
+class Demo01MyThread extends Thread {
+	private Demo01PrintMsg pm;
 
-	public MyThread1(PrintMsg pm) {
+	public Demo01MyThread(Demo01PrintMsg pm) {
 		this.pm = pm;
 	}
 
@@ -31,7 +31,7 @@ class MyThread1 extends Thread {
 	}
 }
 
-class PrintMsg {
+class Demo01PrintMsg {
 	private boolean printNum = true;
 	private Object lock = new Object();
 
