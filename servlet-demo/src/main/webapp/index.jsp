@@ -8,5 +8,12 @@
 </head>
 <body>
 	index
+	
+	<form action="servlet1" method="post">
+		p1:<input type="text" name="p1" value="11"><br/>
+		p1:<input type="text" name="p1" value="12"><br/>
+		p2:<input type="text" name="p2" value="21"><br/>
+		<input type="submit">
+	</form>
 </body>
 </html>
