@@ -8,69 +8,74 @@ package cn.leo.demo.thread.sync;
 public class Demo01 {
 	public static void main(String[] args) {
 
-		Demo01PrintMsg printMsg = new Demo01PrintMsg();
+		PrintMsg printMsg = new PrintMsg();
 
-		new Demo01MyThread(printMsg).start();
+		new MyThread(printMsg).start();
 
 		printMsg.printNum();
 
 	}
+	
+	private static class MyThread extends Thread {
+		private PrintMsg pm;
 
-}
-
-class Demo01MyThread extends Thread {
-	private Demo01PrintMsg pm;
-
-	public Demo01MyThread(Demo01PrintMsg pm) {
-		this.pm = pm;
-	}
-
-	@Override
-	public void run() {
-		pm.printChar();
-	}
-}
-
-class Demo01PrintMsg {
-	private boolean printNum = true;
-	private Object lock = new Object();
-
-	public void printNum() {
-		for (int s = 1; s <= 5; s++) {
-			synchronized (lock) {
-				if (!printNum) {
-					try {
-						lock.wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
-				}
-				for (int i = 1; i <= 3; i++) {
-					System.out.println(i);
-				}
-				printNum = false;
-				lock.notify();
-			}
+		public MyThread(PrintMsg pm) {
+			this.pm = pm;
 		}
 
+		@Override
+		public void run() {
+			pm.printChar();
+		}
 	}
+	
+	
+	private static class PrintMsg {
+		private boolean printNum = true;
+		private Object lock = new Object();
 
-	public void printChar() {
-		for (int s = 1; s <= 5; s++) {
-			synchronized (lock) {
-				if (printNum) {
-					try {
-						lock.wait();
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+		public void printNum() {
+			for (int s = 1; s <= 5; s++) {
+				synchronized (lock) {
+					if (!printNum) {
+						try {
+							lock.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
 					}
+					for (int i = 1; i <= 3; i++) {
+						System.out.println(i);
+					}
+					printNum = false;
+					lock.notify();
 				}
-				for (int i = 0; i <= 2; i++) {
-					System.out.println((char) ('a' + i));
+			}
+
+		}
+
+		public void printChar() {
+			for (int s = 1; s <= 5; s++) {
+				synchronized (lock) {
+					if (printNum) {
+						try {
+							lock.wait();
+						} catch (InterruptedException e) {
+							e.printStackTrace();
+						}
+					}
+					for (int i = 0; i <= 2; i++) {
+						System.out.println((char) ('a' + i));
+					}
+					printNum = true;
+					lock.notify();
 				}
-				printNum = true;
-				lock.notify();
 			}
 		}
 	}
+
 }
+
+
+
+

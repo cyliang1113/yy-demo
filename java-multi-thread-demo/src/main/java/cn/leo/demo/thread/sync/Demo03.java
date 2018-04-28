@@ -1,5 +1,9 @@
 package cn.leo.demo.thread.sync;
 
+
+/**
+ * synchronized重入
+ */
 public class Demo03 {
 	public static int i;
 	public static Object lock = new Object();
