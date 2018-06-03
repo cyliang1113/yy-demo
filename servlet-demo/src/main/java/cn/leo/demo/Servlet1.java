@@ -27,8 +27,9 @@ public class Servlet1 extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		logger.info("get请求");
-		
+
 		// 请求参数key的集合
+		logger.info("req.getParameterNames()");
 		Enumeration<String> names = req.getParameterNames();
 		while(names.hasMoreElements()){
 			logger.info(names.nextElement());
@@ -36,6 +37,7 @@ public class Servlet1 extends HttpServlet{
 		logger.info("==================================");
 		
 		// 请求参数key=value的map key=[value1, value2, ...], 相同key的value放在同一个数组中, key没有相同的数组里value也只有一个
+		logger.info("req.getParameterMap()");
 		Map parameterMap = req.getParameterMap();
 		Set<String> keySet = parameterMap.keySet();
 		for (String key : keySet) {
@@ -45,11 +47,13 @@ public class Servlet1 extends HttpServlet{
 		logger.info("==================================");
 		
 		// 返回key对应的value, 如果相同key有多个则返回第一个value
+		logger.info("req.getParameter");
 		String p1 = req.getParameter("p1");
 		logger.info("p1=" + p1);
 		logger.info("==================================");
 		
 		// 返回key对应value的数组, 如果相同key只有一个数组中这有一个元素
+		logger.info("req.getParameterValues");
 		String[] p1Arr = req.getParameterValues("p1");
 		logger.info("p1=" + Arrays.toString(p1Arr));
 		
@@ -64,14 +68,17 @@ public class Servlet1 extends HttpServlet{
 		logger.info("post请求");
 		
 		// getReader必须在getParameter前面, 不然从流里面就读不到了
+		// getReader和getParameter只要有一个执行了, 另一个就获取不到数据了
+
+		logger.info("req.getReader");
 		// 获得请求体里的内容
-		BufferedReader inR = req.getReader();
+//		BufferedReader inR = req.getReader();
 //		String readLine = inR.readLine();
 //		logger.info(readLine);
-		char[] cb = new char[1024];
-		int read = inR.read(cb);
-		logger.info(read);
-		logger.info(Arrays.toString(cb));
+//		char[] cb = new char[1024];
+//		int read = inR.read(cb);
+//		logger.info(read);
+//		logger.info(Arrays.toString(cb));
 		logger.info("==================================");
 		
 		// 请求参数key的集合
