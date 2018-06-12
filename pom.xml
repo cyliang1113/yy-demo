@@ -6,8 +6,11 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<modules>
+		<!--<module>java-demo-maven</module>-->
+		<!--<module>java-multi-thread-demo</module>-->
+		<!--<module>servlet-demo</module>-->
+		<module>spring-mvc-demo</module>
 		<module>java-demo-maven</module>
-		<module>java-multi-thread-demo</module>
 	</modules>
 	
 </project>
