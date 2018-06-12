@@ -4,7 +4,16 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 
-	
+	<filter>
+		<filter-name>TrackFilter</filter-name>
+		<filter-class>cn.lab.neon.common.soa.filter.TrackFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>TrackFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+
 	<!-- spring核心Listener 
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
