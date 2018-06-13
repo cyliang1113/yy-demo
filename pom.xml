@@ -3,6 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.leo.demo</groupId>
 	<artifactId>java-demo</artifactId>
+	<packaging>pom</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<modules>
@@ -11,6 +12,7 @@
 		<!--<module>servlet-demo</module>-->
 		<module>spring-mvc-demo</module>
 		<module>java-demo-maven</module>
+		<module>spring-demo</module>
 	</modules>
 	
 </project>
