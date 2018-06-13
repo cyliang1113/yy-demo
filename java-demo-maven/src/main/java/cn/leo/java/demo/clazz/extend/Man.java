@@ -21,4 +21,8 @@ public class Man extends Person {
 
 	}
 
+	public int getAge(){
+		return this.age;
+	}
+
 }

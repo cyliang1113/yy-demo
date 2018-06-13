@@ -17,4 +17,8 @@ public class Person {
 
 	}
 
+	public int getAge(){
+		return this.age;
+	}
+
 }
