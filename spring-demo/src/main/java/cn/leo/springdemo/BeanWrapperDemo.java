@@ -8,6 +8,7 @@ public class BeanWrapperDemo {
     public static void main(String[] args) {
         MutablePropertyValues pvs = new MutablePropertyValues();
         pvs.add("name", "li");
+        pvs.add("age", 18);
         Person person = new Person();
         BeanWrapper bw = new BeanWrapperImpl(person);
         bw.setPropertyValues(pvs);
