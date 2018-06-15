@@ -10,4 +10,8 @@ public class FooService {
     public void setFooDao(FooDao fooDao) {
         this.fooDao = fooDao;
     }
+
+    public void setAbc(){
+
+    }
 }

@@ -11,20 +11,16 @@
 	http://www.springframework.org/schema/tx 
 	http://www.springframework.org/schema/tx/spring-tx.xsd" default-autowire="byName">
 
-	<!-- autowire="" autowire属性控制自动装配 默认是不使用自动装配 -->
-	<!-- 可以在beans标签里设置default-autowire, 也可以在bean标签里设置autowire -->
-	<!-- 设置了autowire还需要提供set方法才能实现自动装配 -->
-	<bean id="fooService" class="cn.leo.springdemo.autowire.FooService" autowire="byName"/>
-
-	<bean id="fooDao" class="cn.leo.springdemo.autowire.FooDao"/>
-
+	<bean id="userService" class="cn.leo.springdemo.aop.UserServiceImpl"/>
 
 	<bean id="logAdvice" class="cn.leo.springdemo.aop.LogAdvice"/>
 	<aop:config>
 		<aop:pointcut id="logPointcut" expression="execution(* cn.leo.springdemo.aop.UserServiceImpl.*(..))"/>
 
+
 		<aop:aspect ref="logAdvice" order="10000">  <!--order 拦截器链上排序, 值越小优先级越高 -->
 			<aop:around method="around" pointcut-ref="logPointcut" />
 		</aop:aspect>
 	</aop:config>
+
 </beans>

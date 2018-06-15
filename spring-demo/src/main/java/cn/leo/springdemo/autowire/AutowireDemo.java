@@ -1,4 +1,4 @@
-package cn.leo.springdemo;
+package cn.leo.springdemo.autowire;
 
 import cn.leo.springdemo.autowire.FooService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
