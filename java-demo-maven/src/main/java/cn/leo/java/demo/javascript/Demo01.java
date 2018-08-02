@@ -1,17 +1,6 @@
 
 package cn.leo.java.demo.javascript;
 
-import java.io.BufferedReader;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.lang.reflect.Array;
-import java.util.Map;
-
-import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
-
-import sun.org.mozilla.javascript.internal.NativeArray;
-
 /** * 直接调用js代码 */
 public class Demo01 {
 	public static void main(String[] args) throws Exception {
