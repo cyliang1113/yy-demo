@@ -3,8 +3,9 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
-	<settings>
-        <!-- 打印查询语句 -->
-        <setting name="logImpl" value="STDOUT_LOGGING" />
-    </settings>
+	<!--<settings>-->
+        <!-- 指定日志输出, 没有则使用项目默认Log, 如:Log4J, STDOUT_LOGGING:打印到控制台-->
+        <!--<setting name="logImpl" value="STDOUT_LOGGING" />-->
+        <!--<setting name="logImpl" value="SLF4J" />-->
+    <!--</settings>-->
 </configuration>

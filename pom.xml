@@ -9,7 +9,7 @@
 	<modules>
 		<!--<module>java-demo-maven</module>-->
 		<!--<module>java-multi-thread-demo</module>-->
-		<!--<module>servlet-demo</module>-->
+		<module>servlet-demo</module>
 		<module>spring-mvc-demo</module>
 		<module>java-demo-maven</module>
 		<module>spring-demo</module>
