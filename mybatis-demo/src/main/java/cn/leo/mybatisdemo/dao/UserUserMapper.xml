@@ -3,7 +3,6 @@
 <mapper namespace="cn.leo.mybatisdemo.dao.UserUserDao">
 
 	<resultMap id="userUserResultMap" type="cn.leo.mybatisdemo.po.UserUser">
-		<id column="id" property="id" />
 		<result column="user_id" property="userId" />
 		<result column="username" property="username" />
 		<result column="cellphone" property="cellphone" />
@@ -25,6 +24,12 @@
 		    </if>
 	  	</where>
 	</sql>
+
+	<update id="updateUsernameByUserId" parameterType="java.util.Map">
+		UPDATE t_user_user
+		SET username = #{username}
+		where user_id = #{userId}
+	</update>
 	
 	
 	

@@ -7,6 +7,8 @@ import cn.leo.mybatisdemo.dao.UserUserDao;
 import cn.leo.mybatisdemo.po.UserUser;
 import cn.leo.mybatisdemo.service.UserUserService;
 
+import java.util.Map;
+
 @Service("userUserService")
 public class UserUserServiceImpl implements UserUserService {
 	
@@ -17,6 +19,11 @@ public class UserUserServiceImpl implements UserUserService {
 	public UserUser findByUserId(Long userId) {
 		
 		return userUserDao.findByUserId(userId);
+	}
+
+	@Override
+	public int updateUsernameByUserId(Map map) {
+		return userUserDao.updateUsernameByUserId(map);
 	}
 
 }
