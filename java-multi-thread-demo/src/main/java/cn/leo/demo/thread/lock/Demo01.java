@@ -4,17 +4,17 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Demo01 {
-	public static Lock lock = new ReentrantLock();
+	public static Lock lock = new ReentrantLock(true);
 	
 	public static void main(String[] args) {
-		new Thread() {
+		new Thread("111") {
 			@Override
 			public void run() {
 				print1();
 			}
 		}.start();
 
-		new Thread() {
+		new Thread("222") {
 			@Override
 			public void run() {
 				print2();
