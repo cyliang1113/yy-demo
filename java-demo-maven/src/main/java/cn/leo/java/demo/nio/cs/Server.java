@@ -29,12 +29,14 @@ public class Server {
 			serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
 
 			while (true) {
+				System.out.println("select()");
 				selector.select();
-
 				Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
 
 				while (iterator.hasNext()) {
 					SelectionKey key = iterator.next();
+                    System.out.println("key=" + key);
+                    System.out.println("key.channel()=" + key.channel().getClass());
 					iterator.remove();
 
 					if (key.isAcceptable()) {
