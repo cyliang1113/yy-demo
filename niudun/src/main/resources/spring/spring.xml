@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress SpringFacetInspection -->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!-- create by shi.pengyan 2018-04-25 -->
+
+     <!-- for example: dubbo xml-->
+     <import resource="dubbo/dubbo.xml"/>
+     <import resource="dubbo/dubbo-basic-consumer.xml"/>
+     <import resource="dubbo/dubbo-c-order-consumer.xml"/>
+     <import resource="dubbo/dubbo-b-customer.xml"/>
+     <import resource="dubbo/dubbo-b-userinfo-customer.xml"/>
+ </beans>

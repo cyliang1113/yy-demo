@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <!--<dubbo:consumer timeout="#{environment['dubbo.consumer.timeout']}"/>-->
+
+    <!--b-carsaas -->
+    <!-- 二维码-->
+    <dubbo:reference id="microShopFacade"
+                     registry="cheguo_b"
+                     interface="com.cheguo.carsaas.facade.MicroShopFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}"
+                     version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}"/>
+
+
+    <!--b-cgtrade -->
+    <!-- 订单交易接口 -->
+    <!--<dubbo:reference interface="com.cheguo.cgtrade.facade.order.TradeCustomerServiceHandleFacade" id="tradeCustomerServiceHandleFacade" retries="${cheguo_b}"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     timeout="${dubbo.cg.b.timeout}" registry="cheguo_b"/>
+    
+    <dubbo:reference interface="com.cheguo.cgtrade.facade.order.TradeOrderFacade" id="tradeOrderFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+    
+    <dubbo:reference interface="com.cheguo.cgtrade.facade.order.TradeOrderOperLogFacade" id="tradeOrderOperLogFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference interface="com.cheguo.cgtrade.facade.order.TradeOrderBrokerFacade" id="tradeOrderBrokerFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference interface="com.cheguo.cgtrade.facade.order.TradeVirtualOrderFacade" id="tradeVirtualOrderFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>-->
+    <!--b-carsrc -->
+    <!-- 增加车源接口 -->
+    <dubbo:reference id="companyCarSourceorderService"
+                     interface="com.cheguo.carsrc.facade.CompanyCarSourceOrderFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="companySecondcarSourceorderService"
+                     interface="com.cheguo.carsrc.facade.CompanySecondcarSourceOrderFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <!--b-userinfo -->
+    <dubbo:reference id="companyBranchService" interface="com.cheguo.userinfo.service.ICompanyBranchService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="companyCooService" interface="com.cheguo.userinfo.service.ICompanyCooService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="companyService" interface="com.cheguo.userinfo.service.ICompanyService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="compnayOperatorService" interface="com.cheguo.userinfo.service.ICompnayOperatorService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="rechargeService" interface="com.cheguo.userinfo.service.IRechargeService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="userRepaymentService" interface="com.cheguo.userinfo.service.IUserRepaymentService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="userInfoService" interface="com.cheguo.userinfo.service.IUserInfoService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="companyPicService" interface="com.cheguo.userinfo.service.ICompanyPicService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="carmodSeriesService" interface="com.cheguo.carmodel.service.CarmodSeriesService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="carmodMakerBrandService" interface="com.cheguo.carmodel.service.CarmodMakerBrandService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="carmodBrandService" interface="com.cheguo.carmodel.service.CarmodBrandService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="brandInfoService" interface="com.cheguo.carmodel.service.IBrandInfoService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="carBaseService" interface="com.cheguo.carmodel.service.ICarBaseService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <!-- 企业管理 -->
+    <dubbo:reference id="companyBusinessService" interface="com.cheguo.userinfo.service.ICompanyBusinessService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference id="businessPicService" interface="com.cheguo.userinfo.service.IBusinessPicService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <!-- 进销存管理 -->
+    <dubbo:reference interface="com.cheguo.carsaas.facade.SupplierFacade" id="supplierFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference interface="com.cheguo.carsaas.facade.SellOrderFacade" id="sellOrderFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference interface="com.cheguo.carsaas.facade.InvoicingFacade" id="invoicingFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <dubbo:reference interface="com.cheguo.carsaas.facade.SalesContractFacade" id="salesContractFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+    <dubbo:reference interface="com.cheguo.carsaas.facade.PurchaseApprovalFacade" id="purchaseApprovalFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+    <dubbo:reference interface="com.cheguo.carsaas.facade.TicketApprovalFacade" id="ticketApprovalFacade"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+    <!--经纪人-->
+    <dubbo:reference interface="com.cheguo.userinfo.service.IBrokerUserService" id="brokerUserService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+    <dubbo:reference interface="com.cheguo.userinfo.service.IBrokerAuthHistoryService" id="brokerAuthHistoryService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+
+    <!--车商客服问题-->
+    <dubbo:reference interface="com.cheguo.other.service.IUserFeedbackService" id="userFeedbackService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+    <dubbo:reference interface="com.cheguo.other.service.IQuestionTypeService" id="questionTypeService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+    <dubbo:reference interface="com.cheguo.other.service.IQuestionService" id="questionService"
+                     group="#{environment['dubbo.cheguo.b.group']}" version="#{environment['dubbo.cheguo.b.version']}"
+                     check="#{environment['dubbo.cheguo.b.check']}" registry="cheguo_b"/>
+
+</beans>

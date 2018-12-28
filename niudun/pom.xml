@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>niudun-console-server</artifactId>
+    <groupId>com.cheguo.niudun.console.server</groupId>
+    <version>4.1.5-b_register_2-SNAPSHOT</version>
+
+    <parent>
+        <groupId>com.cheguo.apollo</groupId>
+        <artifactId>apollo-root</artifactId>
+        <version>1.3.0</version>
+    </parent>
+
+
+    <properties>
+        <!--内部包版本-->
+        <cheguo.apollo-sys.version>1.4.0</cheguo.apollo-sys.version>
+        <cheguo.foundation.core.version>1.3.0-SNAPSHOT</cheguo.foundation.core.version>
+        <cheguo.foundation.sys.version>1.0.0</cheguo.foundation.sys.version>
+        <cheguo.apollo.core.version>0.0.9</cheguo.apollo.core.version>
+        <cheguo.order.version>3.0.7</cheguo.order.version>
+        <cheguo.poseidon.poseidon-toolkit>3.0.0</cheguo.poseidon.poseidon-toolkit>
+        <!--第三方包版本-->
+
+        <!--manage迁移某块-->
+        <cheguo.basic.version>3.0.0</cheguo.basic.version>
+        <cheguo.credit.version>3.0.0</cheguo.credit.version>
+        <cheguo.userinfo.version>4.1.5-b_register_2-SNAPSHOT</cheguo.userinfo.version>
+        <cheguo.user.version>3.0.6</cheguo.user.version>
+        <cheguo.poseidon.poseidon-toolkit>3.0.0</cheguo.poseidon.poseidon-toolkit>
+        <cheguo.other.version>4.2.4-SNAPSHOT</cheguo.other.version>
+        <cheguo.external.version>3.0.2</cheguo.external.version>
+        <cheguo.carmodel.version>3.0.8</cheguo.carmodel.version>
+        <cheguo.caractive.version>3.0.2</cheguo.caractive.version>
+        <cheguo.zeus.version>1.0.5</cheguo.zeus.version>
+        <cheguo.cardealer.version>1.3.0</cheguo.cardealer.version>
+        <cheguo.mix.version>3.3.2</cheguo.mix.version>
+
+    </properties>
+
+    <dependencies>
+        <!--manage迁移pom 开始-->
+        <dependency>
+            <groupId>com.cheguo</groupId>
+            <artifactId>mix-api</artifactId>
+            <version>${cheguo.mix.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cheguo.foundation.cardealer</groupId>
+            <artifactId>cardealer-facade</artifactId>
+            <version>${cheguo.cardealer.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.zeus</groupId>
+            <artifactId>zeus-facade</artifactId>
+            <version>${cheguo.zeus.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.poseidon</groupId>
+            <artifactId>poseidon-toolkit</artifactId>
+            <version>${cheguo.poseidon.poseidon-toolkit}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo</groupId>
+            <artifactId>credit-api</artifactId>
+            <version>${cheguo.credit.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.user</groupId>
+            <artifactId>user-api</artifactId>
+            <version>${cheguo.user.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo</groupId>
+            <artifactId>userinfo-api</artifactId>
+            <version>${cheguo.userinfo.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.caractive</groupId>
+            <artifactId>caractive-api</artifactId>
+            <version>${cheguo.caractive.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.carmodel</groupId>
+            <artifactId>carmodel-api</artifactId>
+            <version>${cheguo.carmodel.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.cheguo.carsaas</groupId>
+                    <artifactId>carsaas-facade</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.cheguo</groupId>
+            <artifactId>other-api</artifactId>
+            <version>${cheguo.other.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>mybatis</artifactId>
+                    <groupId>org.mybatis</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.external</groupId>
+            <artifactId>external-api</artifactId>
+            <version>${cheguo.external.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.cheguo.carsrc</groupId>
+            <artifactId>carsrc-facade</artifactId>
+            <version>4.0.2-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.cheguo</groupId>
+                    <artifactId>api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.cheguo</groupId>
+                    <artifactId>toolkit</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.cheguo</groupId>
+                    <artifactId>user</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.carsaas</groupId>
+            <artifactId>carsaas-facade</artifactId>
+            <version>2.8.8-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.cheguo</groupId>
+                    <artifactId>api</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.umpay</groupId>
+            <artifactId>umpay_sign</artifactId>
+            <version>V40</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.llpay</groupId>
+            <artifactId>httpclient</artifactId>
+            <version>4.2.1</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.llpay</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.llpay</groupId>
+            <artifactId>lianlianpay-security</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--manage迁移pom 结束-->
+        <dependency>
+            <groupId>com.cheguo.apollo.sys</groupId>
+            <artifactId>apollo-sys-all</artifactId>
+            <version>${cheguo.apollo-sys.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.cheguo.apollo</groupId>
+                    <artifactId>apollo-core</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.apollo</groupId>
+            <artifactId>apollo-core</artifactId>
+            <version>${cheguo.apollo.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.order</groupId>
+            <artifactId>order-api</artifactId>
+            <version>${cheguo.order.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis-spring</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>basic-api</artifactId>
+                    <groupId>com.cheguo</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>mix-api</artifactId>
+                    <groupId>com.cheguo</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.poseidon</groupId>
+            <artifactId>poseidon-toolkit</artifactId>
+            <version>${cheguo.poseidon.poseidon-toolkit}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.mybatis</groupId>
+                    <artifactId>mybatis-spring</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>servlet-api</artifactId>
+                    <groupId>javax.servlet</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.foundation</groupId>
+            <artifactId>foundation-core</artifactId>
+            <version>${cheguo.foundation.core.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.cheguo.foundation</groupId>
+            <artifactId>foundation-sys</artifactId>
+            <version>${cheguo.foundation.sys.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <!--影响dubbo-->
+        <!--<dependency>-->
+        <!--<groupId>org.springframework.boot</groupId>-->
+        <!--<artifactId>spring-boot-devtools</artifactId>-->
+        <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>dubbo</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.101tec</groupId>
+            <artifactId>zkclient</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis-spring</artifactId>
+            <version>1.3.1</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <finalName>niudun-web</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                    <argLine>-Xmx512M</argLine>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>

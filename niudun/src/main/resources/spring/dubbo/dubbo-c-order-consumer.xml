@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+    <!-- 电销工单车商服务 -->
+    <dubbo:reference id="callOrderDealerService"
+                     registry="cheguo_c"
+                     interface="com.cheguo.order.service.callorder.CallOrderDealerService"
+                     group="#{environment['dubbo.cheguo.c.group']}"
+                     version="#{environment['dubbo.cheguo.c.version']}"
+                     check="#{environment['dubbo.cheguo.c.check']}"/>
+
+    <!-- 电销工单标签服务 -->
+    <dubbo:reference id="callOrderLabelService"
+                     registry="cheguo_c"
+                     interface="com.cheguo.order.service.callorder.CallOrderLabelService"
+                     group="#{environment['dubbo.cheguo.c.group']}"
+                     version="#{environment['dubbo.cheguo.c.version']}"
+                     check="#{environment['dubbo.cheguo.c.check']}"/>
+
+    <!-- 电销工单车商标签关联服务 -->
+    <dubbo:reference id="callOrderDealerLabelService"
+                     registry="cheguo_c"
+                     interface="com.cheguo.order.service.callorder.CallOrderDealerLabelService"
+                     group="#{environment['dubbo.cheguo.c.group']}"
+                     version="#{environment['dubbo.cheguo.c.version']}"
+                     check="#{environment['dubbo.cheguo.c.check']}"/>
+
+    <!-- 电销工单导入记录服务 -->
+    <dubbo:reference id="callOrderDealerImportService"
+                     registry="cheguo_c"
+                     interface="com.cheguo.order.service.callorder.CallOrderDealerImportService"
+                     group="#{environment['dubbo.cheguo.c.group']}"
+                     version="#{environment['dubbo.cheguo.c.version']}"
+                     check="#{environment['dubbo.cheguo.c.check']}"/>
+
+    <!-- 电销工单问题调研记录服务 -->
+    <dubbo:reference id="callOrderProblemsResearchService"
+                     registry="cheguo_c"
+                     interface="com.cheguo.order.service.callorder.CallOrderProblemsResearchService"
+                     group="#{environment['dubbo.cheguo.c.group']}"
+                     version="#{environment['dubbo.cheguo.c.version']}"
+                     check="#{environment['dubbo.cheguo.c.check']}"/>
+
+    <!-- 电销工单车商跟进服务 -->
+    <dubbo:reference id="callOrderTrackService"
+                     registry="cheguo_c"
+                     interface="com.cheguo.order.service.callorder.CallOrderTrackService"
+                     group="#{environment['dubbo.cheguo.c.group']}"
+                     version="#{environment['dubbo.cheguo.c.version']}"
+                     check="#{environment['dubbo.cheguo.c.check']}"/>
+
+    <!-- 电销工单车商分配服务 -->
+    <dubbo:reference id="callOrderDealerDistributionService"
+                     registry="cheguo_c"
+                     interface="com.cheguo.order.service.callorder.CallOrderDealerDistributionService"
+                     group="#{environment['dubbo.cheguo.c.group']}"
+                     version="#{environment['dubbo.cheguo.c.version']}"
+                     check="#{environment['dubbo.cheguo.c.check']}"/>
+
+</beans>

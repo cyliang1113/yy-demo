@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+
+
+    <!--外部服务-->
+
+    <!--区域信息-->
+    <dubbo:reference id="areaInfoService"
+                     registry="cheguo_basic_api"
+                     interface="com.cheguo.basic.service.IAreaInfoService"
+                     group="#{environment['dubbo.cheguo.basic-api.group']}"
+                     version="#{environment['dubbo.cheguo.basic-api.version']}"
+                     check="#{environment['dubbo.cheguo.basic-api.check']}"/>
+    <!--发短信-->
+    <dubbo:reference id="smsService"
+                     registry="cheguo_basic_api"
+                     interface="com.cheguo.basic.service.ISmsService"
+                     group="#{environment['dubbo.cheguo.basic-api.group']}"
+                     version="#{environment['dubbo.cheguo.basic-api.version']}"
+                     check="#{environment['dubbo.cheguo.basic-api.check']}"
+                     validation="true"/>
+
+    <!--用户中心-->
+    <dubbo:reference id="zaUserService"
+                     registry="cheguo_basic_user"
+                     interface="com.cheguo.foundation.user.facade.api.ZaUserService"
+                     group="#{environment['dubbo.cheguo.basic-user.group']}"
+                     version="#{environment['dubbo.cheguo.basic-user.version']}"
+                     check="#{environment['dubbo.cheguo.basic-user.check']}"
+                     validation="true"/>
+</beans>

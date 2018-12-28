@@ -1,0 +1,109 @@
+# Powerby 架构组 spy
+#
+spring:
+  datasource:
+    druid:
+      initial-size: 2
+    url: jdbc:mysql://CheGuo-DB:3306/niudun_console?characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;useCompression=true
+    username: web_dev3
+    password: jack@cheguo360
+  redis:
+    password: 123456
+    # Redis数据库索引（默认为0）
+    database: 0
+    port: 6379
+    pool:
+      # 连接池中的最大空闲连接
+      max-idle: 8
+      # 连接池中的最小空闲连接
+      min-idle: 0
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active: 8
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait: -1
+    # Redis服务器地址
+    host: 10.10.13.40
+    # 连接超时时间（毫秒）
+    timeout: 0
+  activemq:
+    broker-url: failover:(tcp://10.10.13.40:61616)
+    user:
+    password:
+
+cheguo:
+  apollo-sys:
+    async-task-concurrency-limit: 100
+    task-core-pool-size: 4
+    task-max-pool-size: 200
+    task-queue-capacity: 100
+    check_user_login: false
+    validate-resource-function: false
+    #集成模式true；非集成模式false
+    sso-mode: false
+    local:
+        #待定
+        loginUrl: http://10.10.13.154:7654/#/app/login
+        successUrl: http://10.10.13.40:7654/#/home
+    cas:
+        casServerUrlPrefix: http://10.10.13.40:8080
+        shiroServerUrlPrefix: http://10.10.13.76:8754
+        successUrl: http://10.10.13.119:2020/#/home
+        casServerLogoutUrl: http://10.10.13.40:8080/logout?service=http://10.10.13.76:8754/api/sys/shiro-apollo
+        sso-modifypwd-url: http://10.10.13.40/modifyPassword
+
+    mq:
+        # 支持的模式VIRTUAL_TOPIC或者QUEUE
+        mode: VIRTUAL_TOPIC
+        persistent: true
+        # 1 自动确认
+        # 2 客户端确认
+        # 3 消息可重复确认
+        # 4 单条确认
+        ack_mode: 4
+
+        url: tcp://10.10.13.40:61616
+
+
+dubbo:
+  #
+  # custom
+  cheguo:
+    # basic-service/ credit-service
+    basic-api:
+      registry:
+        address: zookeeper://cg.common.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 3
+      check: false
+    basic-user:
+      registry:
+        address: zookeeper://cg.common.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 3
+      check: false
+    b:
+      registry:
+        address: zookeeper://cg.b.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 0
+      timeout: 10000
+      check: false
+    c:
+      registry:
+        address: zookeeper://cg.c.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 0
+      timeout: 10000
+      check: false
+    user:
+      registry:
+        address: zookeeper://cg.user.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 0
+      timeout: 10000
+

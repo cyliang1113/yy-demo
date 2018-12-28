@@ -1,0 +1,128 @@
+#
+#
+logging:
+  path: ${user.home}/logs/${spring.application.name}
+
+
+spring:
+  datasource:
+    druid:
+      initial-size: 2
+    url: jdbc:mysql://10.10.13.7:3306/niudun_console?characterEncoding=UTF8&amp;zeroDateTimeBehavior=convertToNull&amp;useServerPrepStmts=false&amp;rewriteBatchedStatements=true&amp;useCompression=true
+    username: web_dev3
+    password: jack@cheguo360
+    #Redis配置
+    redis:
+      password: 123456
+      # Redis数据库索引（默认为0）
+      database: 0
+      port: 6379
+      pool:
+        # 连接池中的最大空闲连接
+        max-idle: 8
+        # 连接池中的最小空闲连接
+        min-idle: 0
+        # 连接池最大连接数（使用负值表示没有限制）
+        max-active: 8
+        # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-wait: -1
+      # Redis服务器地址
+      host: 10.10.13.40
+      # 连接超时时间（毫秒）
+      timeout: 0
+    #MQ 配置
+    activemq:
+      broker-url: failover:(tcp://10.10.13.40:61616)
+      user:
+      password:
+
+#apollo配置
+cheguo:
+  apollo-sys:
+    async-task-concurrency-limit: 10
+    task-core-pool-size: 4
+    task-max-pool-size: 20
+    task-queue-capacity: 100
+    #是否做登录检查
+    check_user_login: false
+    #是否做权限操作检查
+    validate-resource-function: false
+    #集成模式true；非集成模式false
+    sso-mode: false
+    #非集成模式下
+    local:
+      #登录地址
+      loginUrl: /login.html
+      #登录成功跳转url
+      successUrl: /index
+    #集成模式下
+    cas:
+      #sso服务地址
+      casServerUrlPrefix: http://10.10.13.40:8080
+      #sso客户端服务地址
+      shiroServerUrlPrefix: http://127.0.0.1:8080
+      #登录成功跳转
+      successUrl: /index
+      #sso登出地址
+      casServerLogoutUrl: http://10.10.13.14:8080/logout?service=http%3a%2f%2f10.10.13.14%2findex.651ec565.html
+      #sso用户修改密码url
+      sso-modifypwd-url: http://10.10.13.40/modifyPassword
+    mq:
+      # 支持的模式VIRTUAL_TOPIC或者QUEUE
+      mode: VIRTUAL_TOPIC
+      persistent: true
+      # 1 自动确认
+      # 2 客户端确认
+      # 3 消息可重复确认
+      # 4 单条确认
+      ack_mode: 4
+
+      url: tcp://10.10.13.40:61616
+
+
+dubbo:
+  #
+  # custom
+  cheguo:
+    # basic-service/ credit-service
+    basic-api:
+      registry:
+        address: zookeeper://cg.common.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 3
+      check: false
+    # user-center
+    basic-user:
+      registry:
+        address: zookeeper://cg.common.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 3
+      check: false
+    b:
+      registry:
+        address: zookeeper://cg.b.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 0
+      timeout: 10000
+      check: false
+    c:
+      registry:
+        address: zookeeper://cg.c.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 0
+      timeout: 10000
+      check: false
+    user:
+      registry:
+        address: zookeeper://cg.user.zk:2181
+      group: dev
+      version: 1.0.0
+      retries: 0
+      timeout: 10000
+
+
+

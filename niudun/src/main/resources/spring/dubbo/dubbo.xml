@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://code.alibabatech.com/schema/dubbo
+        http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+
+    <!-- 应用名 -->
+    <dubbo:application name="niudun-console-server" logger="slf4j"/>
+
+    <!-- 连接到哪个本地注册中心 -->
+
+    <dubbo:registry id="cheguo_basic_api"
+                    address="#{environment['dubbo.cheguo.basic-api.registry.address']}"
+                    file="#{environment['dubbo.cheguo.basic-api.registry.file']}"
+                    client="zkclient"
+    />
+
+    <dubbo:registry id="cheguo_basic_user"
+                    address="#{environment['dubbo.cheguo.basic-user.registry.address']}" />
+
+    <!-- c -->
+    <dubbo:registry id="cheguo_c"
+                    address="#{environment['dubbo.cheguo.c.registry.address']}" />
+
+    <!-- b -->
+    <dubbo:registry id="cheguo_b"
+                    address="#{environment['dubbo.cheguo.b.registry.address']}" />
+
+
+    <dubbo:consumer timeout="#{environment['dubbo.consumer.timeout']}"/>
+    <!--不要使用group-->
+    <!-- 定义 zookeeper 注册中心地址及协议 -->
+    <!--<dubbo:registry protocol="zookeeper" address="10.10.13.25:2181" client="zkclient" group="car-dealer-dev"/>-->
+
+</beans>
