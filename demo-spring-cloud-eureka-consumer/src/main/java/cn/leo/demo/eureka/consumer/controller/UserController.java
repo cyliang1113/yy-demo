@@ -23,8 +23,9 @@ public class UserController {
 	}
 
 	@GetMapping("/login")
-	public String login(@RequestParam("username") String username,
-						@RequestParam("password") String password
+	public String login(
+			@RequestParam("username") String username,
+			@RequestParam("password") String password
 	) {
 		UserUser userUser = new UserUser();
 		userUser.setUsername(username);
