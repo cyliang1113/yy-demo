@@ -14,7 +14,11 @@
 		<!--<module>java-demo-maven</module>-->
 		<!--<module>spring-demo</module>-->
 		<!--<module>mybatis-demo</module>-->
-		<module>spring-boot-demo</module>
-	</modules>
+		<!--<module>spring-boot-demo</module>-->
+		<module>demo-spring-cloud-eureka-server</module>
+		<module>demo-spring-cloud-eureka-provider</module>
+		<module>demo-spring-cloud-eureka-consumer</module>
+        <module>demo-spring-cloud-eureka-provider-api</module>
+    </modules>
 	
 </project>

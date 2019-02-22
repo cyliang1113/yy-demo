@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl {
 
 	public String getUsername() {
-		return "leon chen";
+		return "Tom David";
 	}
 }

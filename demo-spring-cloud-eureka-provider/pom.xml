@@ -40,6 +40,12 @@
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
 
+		<dependency>
+			<groupId>cn.leo</groupId>
+			<artifactId>demo-spring-cloud-eureka-provider-api</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
 
 	</dependencies>
 
