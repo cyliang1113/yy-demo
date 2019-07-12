@@ -5,10 +5,10 @@
 	
 
 	<insert id="batchInsert" parameterType="java.util.List">
-		insert into user (name, age, address, memo)
+		insert into user (name, age, address, memo, create_time)
 		values
 		<foreach collection="list" item="item" index="index" separator=",">
-			(#{item.name}, #{item.age}, #{item.address}, #{item.memo})
+			(#{item.name}, #{item.age}, #{item.address}, #{item.memo}, #{item.createTime})
 		</foreach>
 	</insert>
 	

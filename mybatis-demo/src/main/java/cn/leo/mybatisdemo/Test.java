@@ -10,6 +10,7 @@ import cn.leo.mybatisdemo.po.UserUser;
 import cn.leo.mybatisdemo.service.UserUserService;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Test {
@@ -19,9 +20,9 @@ public class Test {
 		ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext.xml");
 		UserDao userDao = (UserDao) ac.getBean("userDao");
 
-		for (int i = 0; i < 8000; i++) {
+		for (int i = 0; i < 1; i++) {
 			List<User> users = new ArrayList<>();
-			for (int j = 0; j < 10000; j++) {
+			for (int j = 0; j < 100; j++) {
 				String name = getName();
 				int age = getAge();
 				String add = getMemo();
@@ -31,6 +32,7 @@ public class Test {
 				user.setAddress(add);
 				user.setAge(age);
 				user.setMemo(memo);
+				user.setCreateTime(new Date());
 				users.add(user);
 			}
 			userDao.batchInsert(users);
