@@ -1,31 +1,50 @@
 package cn.leo.demo.thread.threadpool;
 
-import java.util.concurrent.Callable;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.*;
 
 public class Demo01 {
 	public static void main(String[] args) {
-		ExecutorService pool = Executors.newFixedThreadPool(1);
+		int nThreads = 1;
+		ExecutorService pool = new ThreadPoolExecutor(nThreads, nThreads,
+				0L, TimeUnit.MILLISECONDS,
+				new LinkedBlockingQueue<Runnable>(1), new ThreadPoolExecutor.DiscardPolicy());
 
-		Future<String> future = pool.submit(new Callable<String>() {
-			@Override
-			public String call() throws Exception {
-				System.out.println("run...");
-				//Thread.sleep(5000);
-				return "done";
+		pool.execute(() -> {
+			System.out.println("run1...");
+			try {
+				Thread.sleep( 10 * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
 			}
-
 		});
 
-		try {
-			System.out.println(future.get());
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		} catch (ExecutionException e) {
-			e.printStackTrace();
-		}
+		pool.execute(() -> {
+			System.out.println("run2...");
+			try {
+				Thread.sleep( 10 * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+
+		pool.execute(() -> {
+			System.out.println("run3...");
+			try {
+				Thread.sleep( 1 * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+
+		pool.execute(() -> {
+			System.out.println("run4...");
+			try {
+				Thread.sleep( 1 * 1000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+
+		pool.shutdown();
 	}
 }

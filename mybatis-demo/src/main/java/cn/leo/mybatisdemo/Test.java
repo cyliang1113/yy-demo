@@ -32,7 +32,7 @@ public class Test {
 				user.setAddress(add);
 				user.setAge(age);
 				user.setMemo(memo);
-				user.setCreateTime(new Date());
+				user.setCreateTime(new Date(System.currentTimeMillis() + j * 1000));
 				users.add(user);
 			}
 			userDao.batchInsert(users);
